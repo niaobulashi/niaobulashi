@@ -15,9 +15,13 @@ package com.niaobulashi.common.exception;
  * @create: 2019-06-06 15:24
  */
 public class RRException extends RuntimeException {
+
 	private static final long serialVersionUID = 1L;
-	
+
+	// 返回信息
     private String msg;
+
+    // 返回信息代码
     private int code = 500;
     
     public RRException(String msg) {
