@@ -20,12 +20,12 @@ public interface SysRoleDeptDao extends BaseMapper<SysRoleDeptEntity> {
      * @param roleIds
      * @return
      */
-    List<Long> queryDeptIdList(Long[] roleIds);
+    List<Long> queryDeptIdList(Long[] roleIds, String deleteFlag);
 
     /**
      * 根据角色ID数组，批量删除
      * @param roleIds
      * @return
      */
-    int deleteBatch(Long[] roleIds);
+    int deleteBatch(Long[] roleIds, String deleteFlag);
 }

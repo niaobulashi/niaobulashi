@@ -27,5 +27,5 @@ public interface SysRoleMenuDao extends BaseMapper<SysRoleMenuEntity> {
      * @param roleIds
      * @return
      */
-    int deleteBatch(Long[] roleIds);
+    int deleteBatch(Long[] roleIds, String deleteFlag);
 }

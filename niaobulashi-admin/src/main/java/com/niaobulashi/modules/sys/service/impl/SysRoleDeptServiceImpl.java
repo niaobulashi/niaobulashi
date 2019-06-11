@@ -1,11 +1,13 @@
 package com.niaobulashi.modules.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.niaobulashi.common.utils.Constant;
 import com.niaobulashi.modules.sys.dao.SysRoleDeptDao;
 import com.niaobulashi.modules.sys.entity.SysRoleDeptEntity;
 import com.niaobulashi.modules.sys.service.SysRoleDeptService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
  * @author: hulang
  * @create: 2019-06-11 10:42
  */
+@Service("SysRoleDeptService")
 public class SysRoleDeptServiceImpl extends ServiceImpl<SysRoleDeptDao, SysRoleDeptEntity> implements SysRoleDeptService {
 
     private static Logger logger = LoggerFactory.getLogger(SysRoleDeptServiceImpl.class);
@@ -48,7 +51,7 @@ public class SysRoleDeptServiceImpl extends ServiceImpl<SysRoleDeptDao, SysRoleD
      */
     @Override
     public List<Long> queryDeptIdList(Long[] roleIds) {
-        return baseMapper.queryDeptIdList(roleIds);
+        return baseMapper.queryDeptIdList(roleIds, Constant.CODE_DELETE_NO);
     }
 
     /**
@@ -56,7 +59,7 @@ public class SysRoleDeptServiceImpl extends ServiceImpl<SysRoleDeptDao, SysRoleD
      */
     @Override
     public int deleteBatch(Long[] roleIds) {
-        return baseMapper.deleteBatch(roleIds);
+        return baseMapper.deleteBatch(roleIds, Constant.CODE_DELETE_NO);
     }
 }
 

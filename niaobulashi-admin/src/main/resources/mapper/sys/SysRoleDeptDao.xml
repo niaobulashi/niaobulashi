@@ -5,12 +5,10 @@
 
     <!--根据角色ID，获取部门ID列表-->
     <select id="queryDeptIdList" resultType="long">
-        SELECT
-            t.dept_id
-        FROM
-            sys_role_dept t
-        WHERE
-            t.role_id = #{roleId}
+        SELECT t.dept_id FROM sys_role_dept t in
+        <foreach collection="array" item="roleId" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
           AND t.delete_flag = #{deleteFlag}
     </select>
 
