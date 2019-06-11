@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.niaobulashi.modules.sys.dao.SysUserRoleDao">
+
+    <!--根据用户ID，获取角色ID列表-->
+    <select id="queryRoleIdList" resultType="long">
+        SELECT
+            t.role_id
+        FROM
+            sys_user_role t
+        WHERE
+            t.user_id = #{userId}
+          AND t.delete_flag = #{deleteFlag}
+    </select>
+    
+    <!--根据角色ID数组，批量删除-->
+    <delete id="deleteBatch">
+        delete from sys_user_role t where t.role_id in
+        <foreach collection="array" item="roleId" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+            and t.delete_flag = #{deleteFlag}
+    </delete>
+</mapper>
