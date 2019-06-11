@@ -2,6 +2,7 @@ package com.niaobulashi.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -78,6 +79,7 @@ public class SysUserEntity implements Serializable {
     private String deptName;
 
     // 删除标志 0：未删除 1：已删除
+    @TableLogic
     private String deleteFlag;
 
     // 创建时间

@@ -13,44 +13,32 @@ import java.util.List;
 
 /**
  * @program: niaobulashi
- * @description: 菜单管理
+ * @description: 部门管理
  * @author: hulang
- * @create: 2019-06-10 11:01
+ * @create: 2019-06-11 09:34
  */
 @Data
-@TableName("sys_menu")
-public class SysMenuEntity implements Serializable {
+@TableName("sys_dept")
+public class SysDeptEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 菜单ID
+    // 部门ID
     @TableId
-    private Long menuId;
+    private Long deptId;
 
-    // 父菜单ID
-    private Long parentId;
+    // 上级部门ID
+    private String parentId;
 
-    // 父菜单名称
+    // 部门名称
+    private String name;
+
+    // 上级部门名称
     @TableField(exist = false)
     private String parentName;
 
-    // 菜单名称
-    private String name;
-
-    // 菜单URL
-    private String url;
-
-    // 授权（多个逗号分隔，如：user:list,user:create）
-    private String perms;
-
-    // 类型 0：目录  1：菜单    2：按钮
-    private Integer type;
-
-    // 菜单图标
-    private String icon;
-
     // 排序
-    private Integer orderNum;
+    private String orderNum;
 
     // ztree属性
     @TableField(exist = false)
