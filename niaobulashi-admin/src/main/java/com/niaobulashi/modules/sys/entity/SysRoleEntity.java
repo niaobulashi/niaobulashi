@@ -26,7 +26,7 @@ public class SysRoleEntity implements Serializable {
 
     // 角色ID
     @TableId
-    private String roleId;
+    private Long roleId;
 
     // 角色名称
     @NotNull(message = "角色名称不能为空")
@@ -37,7 +37,7 @@ public class SysRoleEntity implements Serializable {
 
     // 部门ID
     @NotNull(message = "部门不能为空")
-    private String deptId;
+    private Long deptId;
 
     // 部门名称
     @TableField(exist = false)
@@ -45,11 +45,11 @@ public class SysRoleEntity implements Serializable {
 
     // 菜单List
     @TableField(exist = false)
-    private List<Long> menuList;
+    private List<Long> menuIdList;
 
     // 部门List
     @TableField(exist = false)
-    private List<Long> deptList;
+    private List<Long> deptIdList;
 
     // 删除标志 0：未删除 1：已删除
     @TableLogic
