@@ -70,7 +70,7 @@ public class ShiroUtils {
     }
 
     // 获取验证码
-    public static String getKeytcha(String key) {
+    public static String getKaptcha(String key) {
         Object keptcha = getSessionAttribute(key);
         if (keptcha == null) {
             throw new RRException("验证码已经失效");

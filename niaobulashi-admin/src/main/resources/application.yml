@@ -11,7 +11,7 @@ server:
 
 spring:
   profiles:
-    active: true
+    active: dev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -45,7 +45,7 @@ renren:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: io.renren.modules.*.entity
+  typeAliasesPackage: com.niaobulashi.modules.*.entity
   global-config:
     #数据库相关配置
     db-config:
