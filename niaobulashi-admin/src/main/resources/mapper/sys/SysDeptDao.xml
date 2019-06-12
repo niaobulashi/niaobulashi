@@ -28,6 +28,6 @@
             sys_dept t
         WHERE
             t.parent_id = #{parentId}
-          AND t.delete_flag = '0'
+          AND t.delete_flag = #{deleteFLag}
     </select>
 </mapper>

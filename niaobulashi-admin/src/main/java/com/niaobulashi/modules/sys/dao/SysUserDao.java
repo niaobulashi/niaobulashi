@@ -27,5 +27,5 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
      * @param userId    用户ID
      * @return
      */
-    List<Long> queryAllMenuId(Long userId);
+    List<Long> queryAllMenuId(Long userId, String deleteFlag);
 }

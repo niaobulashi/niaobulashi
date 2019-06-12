@@ -68,7 +68,7 @@ public class SysUserEntity implements Serializable {
 
     // 角色ID列表
     @TableField(exist = false)
-    private List<Long> roleList;
+    private List<Long> roleIdList;
 
     // 部门ID
     @NotNull(message = "部门不能为空", groups = {AddGroup.class, UpdateGroup.class})

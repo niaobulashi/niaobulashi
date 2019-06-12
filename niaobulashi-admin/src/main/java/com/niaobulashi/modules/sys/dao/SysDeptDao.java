@@ -28,6 +28,6 @@ public interface SysDeptDao extends BaseMapper<SysDeptEntity> {
      * @param parentId  上级部门ID
      * @return
      */
-    List<Long> queryDeptIdList(Long parentId);
+    List<Long> queryDeptIdList(Long parentId, String deleteFLag);
 }
 
