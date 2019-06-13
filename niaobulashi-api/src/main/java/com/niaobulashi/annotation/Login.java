@@ -3,9 +3,10 @@ package com.niaobulashi.annotation;
 import java.lang.annotation.*;
 
 /**
- * 登录效验
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 登录效验
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

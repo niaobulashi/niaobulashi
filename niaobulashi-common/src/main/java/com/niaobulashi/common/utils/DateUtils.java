@@ -10,9 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 日期处理
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 日期处理
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 public class DateUtils {
 	/** 时间格式(yyyy-MM-dd) */

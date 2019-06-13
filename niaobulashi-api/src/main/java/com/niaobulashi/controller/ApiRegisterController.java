@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 /**
- * 注册接口
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 注册接口
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @RestController
 @RequestMapping("/api")

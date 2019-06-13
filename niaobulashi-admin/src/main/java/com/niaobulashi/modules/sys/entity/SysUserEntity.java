@@ -16,13 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 系统用户
- *
- * @author Mark sunlightcs@gmail.com
- */
-/**
  * @program: niaobulashi
- * @description: 系统配置信息
+ * @description: 系统用户
  * @author: hulang    hulang6666@qq.com
  * @create: 2019-06-13 21:19
  */

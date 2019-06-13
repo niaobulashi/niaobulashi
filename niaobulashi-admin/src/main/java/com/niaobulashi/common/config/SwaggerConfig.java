@@ -37,8 +37,8 @@ public class SwaggerConfig{
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("鸟不拉屎开源")
-            .description("renren-admin文档")
-            .termsOfServiceUrl("https://www.renren.io")
+            .description("niaobulashi-admin文档")
+            .termsOfServiceUrl("https://www.niaobulashi.com")
             .version("4.0.0")
             .build();
     }

@@ -9,11 +9,11 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * 用户
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 用户
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Data
 @TableName("tb_user")

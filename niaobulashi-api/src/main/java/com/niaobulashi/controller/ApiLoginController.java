@@ -15,9 +15,10 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.Map;
 
 /**
- * 登录接口
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 登录接口
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @RestController
 @RequestMapping("/api")

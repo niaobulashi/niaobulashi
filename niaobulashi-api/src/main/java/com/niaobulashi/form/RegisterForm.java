@@ -6,11 +6,11 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
-
 /**
- * 注册表单
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 注册表单
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Data
 @ApiModel(value = "注册表单")

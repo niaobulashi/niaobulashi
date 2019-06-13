@@ -7,9 +7,10 @@ import com.niaobulashi.form.LoginForm;
 import java.util.Map;
 
 /**
- * 用户
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 用户
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 public interface UserService extends IService<UserEntity> {
 

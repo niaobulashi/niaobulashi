@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 异常处理器
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 异常处理器
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @RestControllerAdvice
 public class RRExceptionHandler {

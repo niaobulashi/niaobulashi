@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 鸟不拉屎开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.niaobulashi.form;
 
 import io.swagger.annotations.ApiModel;
@@ -15,9 +7,10 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * 登录表单
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 登录表单
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Data
 @ApiModel(value = "登录表单")

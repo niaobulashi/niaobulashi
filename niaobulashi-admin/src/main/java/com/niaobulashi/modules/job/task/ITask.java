@@ -1,9 +1,10 @@
 package com.niaobulashi.modules.job.task;
 
 /**
- * 定时任务接口，所有定时任务都要实现该接口
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 定时任务接口，所有定时任务都要实现该接口
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 public interface ITask {
 

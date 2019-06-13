@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 权限(Token)验证
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 权限(Token)验证
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {

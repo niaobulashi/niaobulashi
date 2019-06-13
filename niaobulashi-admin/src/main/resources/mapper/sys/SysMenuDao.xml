@@ -16,7 +16,7 @@
     </select>
 
     <!--获取不包含按钮的菜单列表，不建议用*，后期修改为具体字段-->
-    <select id="queryNotButtonList" resultType="com.niaobulashi.modules.sys.dao.SysMenuDao">
+    <select id="queryNotButtonList" resultType="com.niaobulashi.modules.sys.entity.SysMenuEntity">
         SELECT
             m.*
         FROM

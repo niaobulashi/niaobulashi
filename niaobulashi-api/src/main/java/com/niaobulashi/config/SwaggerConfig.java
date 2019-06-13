@@ -27,7 +27,7 @@ public class SwaggerConfig {
             //加了ApiOperation注解的类，才生成接口文档
             .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
             //包下的类，才生成接口文档
-            //.apis(RequestHandlerSelectors.basePackage("io.renren.controller"))
+            //.apis(RequestHandlerSelectors.basePackage("com.niaobulashi.controller"))
             .paths(PathSelectors.any())
             .build()
             .securitySchemes(security());
@@ -36,8 +36,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("鸟不拉屎开源")
-            .description("renren-api文档")
-            .termsOfServiceUrl("https://www.renren.io")
+            .description("niaobulashi-api文档")
+            .termsOfServiceUrl("https://www.niaobulashi.com")
             .version("4.0.0")
             .build();
     }

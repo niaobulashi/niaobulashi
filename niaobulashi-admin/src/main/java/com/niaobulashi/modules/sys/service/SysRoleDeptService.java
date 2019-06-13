@@ -5,15 +5,9 @@ import com.niaobulashi.modules.sys.entity.SysRoleDeptEntity;
 
 import java.util.List;
 
-
-/**
- * 角色与部门对应关系
- *
- * @author Mark sunlightcs@gmail.com
- */
 /**
  * @program: niaobulashi
- * @description: 系统配置信息
+ * @description: 角色与部门对应关系
  * @author: hulang    hulang6666@qq.com
  * @create: 2019-06-13 21:19
  */

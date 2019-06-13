@@ -8,11 +8,11 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * 用户Token
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 用户Token
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 @Data
 @TableName("tb_token")

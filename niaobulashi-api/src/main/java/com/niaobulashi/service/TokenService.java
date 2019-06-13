@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.niaobulashi.entity.TokenEntity;
 
 /**
- * 用户Token
- *
- * @author Mark sunlightcs@gmail.com
+ * @program: niaobulashi
+ * @description: 用户Token
+ * @author: hulang
+ * @create: 2019-06-12 19:38
  */
 public interface TokenService extends IService<TokenEntity> {
 
