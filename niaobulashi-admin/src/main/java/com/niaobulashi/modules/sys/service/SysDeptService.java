@@ -8,23 +8,23 @@ import java.util.Map;
 
 /**
  * @program: niaobulashi
- * @description: 部门管理
- * @author: hulang  hulang6666@qq.com
- * @create: 2019-06-12 20:20
+ * @description: 系统配置信息
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 public interface SysDeptService extends IService<SysDeptEntity> {
 
-    List<SysDeptEntity> queryList(Map<String, Object> map);
+	List<SysDeptEntity> queryList(Map<String, Object> map);
 
-    /**
-     * 查询子部门ID列表
-     * @param parentId  上级部门ID
-     */
-    List<Long> queryDetpIdList(Long parentId);
+	/**
+	 * 查询子部门ID列表
+	 * @param parentId  上级部门ID
+	 */
+	List<Long> queryDetpIdList(Long parentId);
 
-    /**
-     * 获取子部门ID，用于数据过滤
-     */
-    List<Long> getSubDeptIdList(Long deptId);
+	/**
+	 * 获取子部门ID，用于数据过滤
+	 */
+	List<Long> getSubDeptIdList(Long deptId);
 
 }

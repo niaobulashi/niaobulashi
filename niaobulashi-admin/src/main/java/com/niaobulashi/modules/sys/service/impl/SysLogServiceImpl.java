@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * @program: niaobulashi
  * @description: 系统日志
- * @author: hulang
- * @create: 2019-06-11 10:42
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Service("sysLogService")
 public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> implements SysLogService {

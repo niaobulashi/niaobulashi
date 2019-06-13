@@ -38,7 +38,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.14</version>
                 <configuration>
-                    <imageName>renren/api</imageName>
+                    <imageName>niaobulashi/api</imageName>
                     <dockerDirectory>${project.basedir}</dockerDirectory>
                     <resources>
                         <resource>

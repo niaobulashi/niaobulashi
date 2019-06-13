@@ -15,7 +15,6 @@
                 AND m.delete_flag = #{deleteFlag}
         WHERE
             1 = 1
-          AND ur.delete_flag = #{deleteFlag}
           AND ur.user_id = #{userId}
     </select>
 
@@ -27,8 +26,7 @@
             sys_user_role ur
                 LEFT JOIN sys_role_menu rm ON rm.role_id = ur.role_id
                 AND rm.delete_flag = #{deleteFlag}
-        WHERE
-            ur.delete_flag = #{deleteFlag}
+        WHERE 1=1
           AND ur.user_id = #{userId};
     </select>
 </mapper>

@@ -9,23 +9,19 @@ import java.util.List;
 /**
  * @program: niaobulashi
  * @description: 角色与菜单对应关系
- * @author: hulang
- * @create: 2019-06-11 10:08
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Mapper
 public interface SysRoleMenuDao extends BaseMapper<SysRoleMenuEntity> {
+	
+	/**
+	 * 根据角色ID，获取菜单ID列表
+	 */
+	List<Long> queryMenuIdList(Long roleId);
 
-    /**
-     * 根据角色ID，获取菜单ID
-     * @param roleId
-     * @return
-     */
-    List<Long> queryMenuIdList(Long roleId, String deleteFlag);
-
-    /**
-     * 根据角色ID，批量删除
-     * @param roleIds
-     * @return
-     */
-    int deleteBatch(Long[] roleIds, String deleteFlag);
+	/**
+	 * 根据角色ID数组，批量删除
+	 */
+	int deleteBatch(Long[] roleIds);
 }

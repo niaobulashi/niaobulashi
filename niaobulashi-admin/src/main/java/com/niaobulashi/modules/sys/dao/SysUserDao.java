@@ -9,23 +9,21 @@ import java.util.List;
 /**
  * @program: niaobulashi
  * @description: 系统用户
- * @author: hulang
- * @create: 2019-06-10 10:41
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Mapper
 public interface SysUserDao extends BaseMapper<SysUserEntity> {
+	
+	/**
+	 * 查询用户的所有权限
+	 * @param userId  用户ID
+	 */
+	List<String> queryAllPerms(Long userId);
+	
+	/**
+	 * 查询用户的所有菜单ID
+	 */
+	List<Long> queryAllMenuId(Long userId);
 
-    /**
-     * 查询用户的所有权限
-     * @param userId    用户ID
-     * @return
-     */
-    List<String> queryAllPerms(Long userId, String deleteFlag);
-
-    /**
-     * 查询用户的所有菜单ID
-     * @param userId    用户ID
-     * @return
-     */
-    List<Long> queryAllMenuId(Long userId, String deleteFlag);
 }

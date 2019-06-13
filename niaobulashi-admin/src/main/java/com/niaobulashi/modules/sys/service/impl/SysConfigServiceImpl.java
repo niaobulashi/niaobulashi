@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.niaobulashi.modules.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,8 +22,8 @@ import java.util.Map;
 /**
  * @program: niaobulashi
  * @description: 系统配置信息
- * @author: hulang  hulang6666@qq.com
- * @create: 2019-06-12 20:21
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Service("sysConfigService")
 public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEntity> implements SysConfigService {

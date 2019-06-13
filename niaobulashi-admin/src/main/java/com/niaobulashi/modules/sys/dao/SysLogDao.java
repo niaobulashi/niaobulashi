@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
  * @program: niaobulashi
  * @description: 系统日志
  * @author: hulang    hulang6666@qq.com
- * @create: 2019-06-12 23:08
+ * @create: 2019-06-13 21:19
  */
 @Mapper
 public interface SysLogDao extends BaseMapper<SysLogEntity> {
-
+	
 }

@@ -9,21 +9,20 @@ import org.slf4j.LoggerFactory;
  * @program: niaobulashi
  * @description: Controller公共组件
  * @author: hulang    hulang6666@qq.com
- * @create: 2019-06-12 21:19
+ * @create: 2019-06-13 21:19
  */
 public abstract class AbstractController {
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+	
+	protected SysUserEntity getUser() {
+		return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
+	}
 
-    protected Logger logger = LoggerFactory.getLogger(AbstractController.class);
+	protected Long getUserId() {
+		return getUser().getUserId();
+	}
 
-    protected SysUserEntity getUser() {
-        return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
-    }
-
-    protected Long getUserId() {
-        return getUser().getUserId();
-    }
-
-    protected Long getDeptId() {
-        return getUser().getDeptId();
-    }
+	protected Long getDeptId() {
+		return getUser().getDeptId();
+	}
 }

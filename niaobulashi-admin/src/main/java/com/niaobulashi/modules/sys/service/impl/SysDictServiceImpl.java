@@ -15,9 +15,9 @@ import java.util.Map;
 
 /**
  * @program: niaobulashi
- * @description: 系统配置信息
- * @author: hulang  hulang6666@qq.com
- * @create: 2019-06-12 20:21
+ * @description: 数据字典
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Service("sysDictService")
 public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> implements SysDictService {

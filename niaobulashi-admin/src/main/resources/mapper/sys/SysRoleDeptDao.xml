@@ -9,7 +9,6 @@
         <foreach collection="array" item="roleId" open="(" separator="," close=")">
             #{roleId}
         </foreach>
-          AND t.delete_flag = #{deleteFlag}
     </select>
 
     <!--根据角色ID数组，批量删除-->
@@ -18,6 +17,5 @@
         <foreach collection="array" item="roleId" open="(" separator="," close=")">
             #{roleId}
         </foreach>
-        and t.delete_flag = #{deleteFlag}
     </delete>
 </mapper>

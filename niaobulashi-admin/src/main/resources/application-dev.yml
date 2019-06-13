@@ -34,16 +34,16 @@ spring:
             multi-statement-allow: true
 
 
-##多数据源的配置，需要引用renren-dynamic-datasource
+##多数据源的配置，需要引用niaobulashi-dynamic-datasource
 #dynamic:
 #  datasource:
 #    slave1:
 #      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
+#      url: jdbc:sqlserver://localhost:1433;DatabaseName=niaobulashi_security
 #      username: sa
 #      password: 123456
 #    slave2:
 #      driver-class-name: org.postgresql.Driver
-#      url: jdbc:postgresql://localhost:5432/renren_security
-#      username: renren
-#      password: 123456
+#      url: jdbc:postgresql://localhost:5432/niaobulashi_security
+#      username: root
+#      password: root

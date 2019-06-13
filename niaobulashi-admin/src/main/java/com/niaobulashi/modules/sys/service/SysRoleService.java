@@ -1,5 +1,6 @@
 package com.niaobulashi.modules.sys.service;
 
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.niaobulashi.common.utils.PageUtils;
 import com.niaobulashi.modules.sys.entity.SysRoleEntity;
@@ -8,35 +9,18 @@ import java.util.Map;
 
 /**
  * @program: niaobulashi
- * @description: 角色管理
+ * @description: 系统配置信息
  * @author: hulang    hulang6666@qq.com
- * @create: 2019-06-12 23:22
+ * @create: 2019-06-13 21:19
  */
 public interface SysRoleService extends IService<SysRoleEntity> {
 
-    /**
-     * 查询
-     * @param params
-     * @return
-     */
-    PageUtils queryPage(Map<String, Object> params);
+	PageUtils queryPage(Map<String, Object> params);
 
-    /**
-     * 保存角色
-     * @param role
-     */
-    void saveRole(SysRoleEntity role);
+	void saveRole(SysRoleEntity role);
 
-    /**
-     * 更新角色
-     * @param role
-     */
-    void update(SysRoleEntity role);
-
-    /**
-     * 批量删除
-     * @param roleIds
-     */
-    void deleteBatch(Long[] roleIds);
+	void update(SysRoleEntity role);
+	
+	void deleteBatch(Long[] roleIds);
 
 }

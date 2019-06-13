@@ -6,10 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @program: niaobulashi
- * @description: 角色管理
- * @author: hulang
- * @create: 2019-06-11 10:29
+ * @description: 系统配置信息
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Mapper
 public interface SysRoleDao extends BaseMapper<SysRoleEntity> {
+	
+
 }

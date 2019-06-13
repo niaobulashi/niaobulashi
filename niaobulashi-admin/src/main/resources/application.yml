@@ -1,12 +1,12 @@
 #Tomcat
 server:
-  port: 8080
   tomcat:
     uri-encoding: UTF-8
     max-threads: 1000
-    min-spare-threads: 20
+    min-spare-threads: 30
+  port: 8080
   servlet:
-    context-path: /niaobulashi
+    context-path: /niaobulashi-admin
 
 
 spring:
@@ -24,6 +24,7 @@ spring:
     host: localhost
     database: 0
     password:     #密码默认为空
+    port: 6379
     timeout: 6000ms
     jedis:
       pool:
@@ -33,9 +34,9 @@ spring:
         min-idle: 5 # 连接池中的最小空闲连接
   freemarker:
     suffix: .html
-    request-context-attribute: requset
+    request-context-attribute: request
 
-renren:
+niaobulashi:
   cluster: false  #集群配置  true集群环境   false单机环境，还需打开pom.xml里的spring-session-data-redis注释
   globalSessionTimeout: 3600   #单机环境，session过期时间为60分钟
   redis:

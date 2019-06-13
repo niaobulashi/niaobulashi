@@ -9,7 +9,6 @@ import com.niaobulashi.modules.sys.entity.SysRoleMenuEntity;
 import com.niaobulashi.modules.sys.service.SysMenuService;
 import com.niaobulashi.modules.sys.service.SysRoleMenuService;
 import com.niaobulashi.modules.sys.service.SysUserService;
-import oracle.jdbc.driver.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +17,12 @@ import java.util.List;
 
 /**
  * @program: niaobulashi
- * @description: 菜单管理
- * @author: hulang
- * @create: 2019-06-11 10:42
+ * @description: 系统配置信息
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-13 21:19
  */
 @Service("sysMenuService")
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
-
 	@Autowired
 	private SysUserService sysUserService;
 	@Autowired
@@ -48,7 +46,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 
 	@Override
 	public List<SysMenuEntity> queryListParentId(Long parentId) {
-		return baseMapper.queryListParentId(parentId, Constant.CODE_DELETE_NO);
+		return baseMapper.queryListParentId(parentId);
 	}
 
 	@Override

@@ -125,7 +125,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.14</version>
                 <configuration>
-                    <imageName>renren/admin</imageName>
+                    <imageName>niaobulashi/admin</imageName>
                     <dockerDirectory>${project.basedir}</dockerDirectory>
                     <resources>
                         <resource>
