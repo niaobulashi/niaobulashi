@@ -10,10 +10,302 @@ Target Server Type    : MYSQL
 Target Server Version : 50635
 File Encoding         : 65001
 
-Date: 2019-06-05 17:17:21
+Date: 2019-06-13 16:54:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `qrtz_blob_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+CREATE TABLE `qrtz_blob_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `BLOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_blob_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_calendars`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_calendars`;
+CREATE TABLE `qrtz_calendars` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `CALENDAR_NAME` varchar(200) NOT NULL,
+  `CALENDAR` blob NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_calendars
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_cron_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+CREATE TABLE `qrtz_cron_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `CRON_EXPRESSION` varchar(120) NOT NULL,
+  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_cron_triggers
+-- ----------------------------
+INSERT INTO `qrtz_cron_triggers` VALUES ('NiaobulashiScheduler', 'TASK_1', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('NiaobulashiScheduler', 'TASK_2', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
+
+-- ----------------------------
+-- Table structure for `qrtz_fired_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+CREATE TABLE `qrtz_fired_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `ENTRY_ID` varchar(95) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `FIRED_TIME` bigint(13) NOT NULL,
+  `SCHED_TIME` bigint(13) NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `STATE` varchar(16) NOT NULL,
+  `JOB_NAME` varchar(200) DEFAULT NULL,
+  `JOB_GROUP` varchar(200) DEFAULT NULL,
+  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
+  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
+  KEY `IDX_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
+  KEY `IDX_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_fired_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_job_details`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_job_details`;
+CREATE TABLE `qrtz_job_details` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `JOB_CLASS_NAME` varchar(250) NOT NULL,
+  `IS_DURABLE` varchar(1) NOT NULL,
+  `IS_NONCONCURRENT` varchar(1) NOT NULL,
+  `IS_UPDATE_DATA` varchar(1) NOT NULL,
+  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_job_details
+-- ----------------------------
+INSERT INTO `qrtz_job_details` VALUES ('NiaobulashiScheduler', 'TASK_1', 'DEFAULT', null, 'com.niaobulashi.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720034636F6D2E6E69616F62756C617368692E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200074C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000174000672656E72656E74000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+INSERT INTO `qrtz_job_details` VALUES ('NiaobulashiScheduler', 'TASK_2', 'DEFAULT', null, 'com.niaobulashi.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720034636F6D2E6E69616F62756C617368692E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200074C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000027074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+
+-- ----------------------------
+-- Table structure for `qrtz_locks`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_locks`;
+CREATE TABLE `qrtz_locks` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `LOCK_NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_locks
+-- ----------------------------
+INSERT INTO `qrtz_locks` VALUES ('NiaobulashiScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('NiaobulashiScheduler', 'TRIGGER_ACCESS');
+
+-- ----------------------------
+-- Table structure for `qrtz_paused_trigger_grps`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+CREATE TABLE `qrtz_paused_trigger_grps` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_paused_trigger_grps
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_scheduler_state`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+CREATE TABLE `qrtz_scheduler_state` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
+  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_scheduler_state
+-- ----------------------------
+INSERT INTO `qrtz_scheduler_state` VALUES ('NiaobulashiScheduler', 'DESKTOP-NNDNCEI1560415467154', '1560416040023', '15000');
+
+-- ----------------------------
+-- Table structure for `qrtz_simple_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+CREATE TABLE `qrtz_simple_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `REPEAT_COUNT` bigint(7) NOT NULL,
+  `REPEAT_INTERVAL` bigint(12) NOT NULL,
+  `TIMES_TRIGGERED` bigint(10) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_simple_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_simprop_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+CREATE TABLE `qrtz_simprop_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `STR_PROP_1` varchar(512) DEFAULT NULL,
+  `STR_PROP_2` varchar(512) DEFAULT NULL,
+  `STR_PROP_3` varchar(512) DEFAULT NULL,
+  `INT_PROP_1` int(11) DEFAULT NULL,
+  `INT_PROP_2` int(11) DEFAULT NULL,
+  `LONG_PROP_1` bigint(20) DEFAULT NULL,
+  `LONG_PROP_2` bigint(20) DEFAULT NULL,
+  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
+  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
+  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
+  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_simprop_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qrtz_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_triggers`;
+CREATE TABLE `qrtz_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `TRIGGER_STATE` varchar(16) NOT NULL,
+  `TRIGGER_TYPE` varchar(8) NOT NULL,
+  `START_TIME` bigint(13) NOT NULL,
+  `END_TIME` bigint(13) DEFAULT NULL,
+  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
+  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
+  KEY `IDX_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_triggers
+-- ----------------------------
+INSERT INTO `qrtz_triggers` VALUES ('NiaobulashiScheduler', 'TASK_1', 'DEFAULT', 'TASK_1', 'DEFAULT', null, '1560411000000', '-1', '5', 'PAUSED', 'CRON', '1560409976000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720034636F6D2E6E69616F62756C617368692E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200074C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000174000B6E69616F62756C6173686974000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+INSERT INTO `qrtz_triggers` VALUES ('NiaobulashiScheduler', 'TASK_2', 'DEFAULT', 'TASK_2', 'DEFAULT', null, '1560411000000', '-1', '5', 'PAUSED', 'CRON', '1560409976000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720034636F6D2E6E69616F62756C617368692E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200074C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000027074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+
+-- ----------------------------
+-- Table structure for `schedule_job`
+-- ----------------------------
+DROP TABLE IF EXISTS `schedule_job`;
+CREATE TABLE `schedule_job` (
+  `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务id',
+  `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
+  `method_name` varchar(100) DEFAULT NULL COMMENT '方法名',
+  `params` varchar(2000) DEFAULT NULL COMMENT '参数',
+  `cron_expression` varchar(100) DEFAULT NULL COMMENT 'cron表达式',
+  `status` tinyint(4) DEFAULT NULL COMMENT '任务状态  0：正常  1：暂停',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`job_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='定时任务';
+
+-- ----------------------------
+-- Records of schedule_job
+-- ----------------------------
+INSERT INTO `schedule_job` VALUES ('1', 'testTask', 'test', 'niaobulashi', '0 0/30 * * * ?', '1', '有参数测试', '2016-12-01 23:16:46');
+INSERT INTO `schedule_job` VALUES ('2', 'testTask', 'test2', null, '0 0/30 * * * ?', '1', '无参数测试', '2016-12-03 14:55:56');
+
+-- ----------------------------
+-- Table structure for `schedule_job_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `schedule_job_log`;
+CREATE TABLE `schedule_job_log` (
+  `log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志id',
+  `job_id` bigint(20) NOT NULL COMMENT '任务id',
+  `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
+  `method_name` varchar(100) DEFAULT NULL COMMENT '方法名',
+  `params` varchar(2000) DEFAULT NULL COMMENT '参数',
+  `status` tinyint(4) NOT NULL COMMENT '任务状态    0：成功    1：失败',
+  `error` varchar(2000) DEFAULT NULL COMMENT '失败信息',
+  `times` int(11) NOT NULL COMMENT '耗时(单位：毫秒)',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`log_id`),
+  KEY `job_id` (`job_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+
+-- ----------------------------
+-- Records of schedule_job_log
+-- ----------------------------
+
+INSERT INTO `schedule_job_log` VALUES ('1', '1', 'testTask', null, 'niaobulashi', '0', null, '0', '2019-06-13 16:37:45');
 
 -- ----------------------------
 -- Table structure for `sys_config`
@@ -25,19 +317,14 @@ CREATE TABLE `sys_config` (
   `param_value` varchar(2000) DEFAULT NULL COMMENT 'value',
   `status` tinyint(4) DEFAULT '1' COMMENT '状态   0：隐藏   1：显示',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `param_key` (`param_key`) USING BTREE
+  UNIQUE KEY `param_key` (`param_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统配置信息表';
 
 -- ----------------------------
 -- Records of sys_config
 -- ----------------------------
-INSERT INTO `sys_config` VALUES ('1', 'CLOUD_STORAGE_CONFIG_KEY', '{\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"aliyunDomain\":\"\",\"aliyunEndPoint\":\"\",\"aliyunPrefix\":\"\",\"qcloudBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuBucketName\":\"ios-app\",\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"type\":1}', '0', '云存储配置信息', null, null, null, null, null);
+INSERT INTO `sys_config` VALUES ('1', 'CLOUD_STORAGE_CONFIG_KEY', '{\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"aliyunDomain\":\"\",\"aliyunEndPoint\":\"\",\"aliyunPrefix\":\"\",\"qcloudBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuBucketName\":\"ios-app\",\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"type\":1}', '0', '云存储配置信息');
 
 -- ----------------------------
 -- Table structure for `sys_dept`
@@ -48,22 +335,19 @@ CREATE TABLE `sys_dept` (
   `parent_id` bigint(20) DEFAULT NULL COMMENT '上级部门ID，一级部门为0',
   `name` varchar(50) DEFAULT NULL COMMENT '部门名称',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
+  `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('1', '0', '鸟不拉屎开源集团', '0', null, null, null, null, null);
-INSERT INTO `sys_dept` VALUES ('2', '1', '长沙分公司', '1', null, null, null, null, null);
-INSERT INTO `sys_dept` VALUES ('3', '1', '上海分公司', '2', null, null, null, null, null);
-INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', null, null, null, null, null);
-INSERT INTO `sys_dept` VALUES ('5', '3', '销售部', '1', null, null, null, null, null);
+INSERT INTO `sys_dept` VALUES ('1', '0', '人人开源集团', '0', '0');
+INSERT INTO `sys_dept` VALUES ('2', '1', '长沙分公司', '1', '0');
+INSERT INTO `sys_dept` VALUES ('3', '1', '上海分公司', '2', '0');
+INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', '0');
+INSERT INTO `sys_dept` VALUES ('5', '3', '销售部', '1', '0');
+INSERT INTO `sys_dept` VALUES ('6', '0', '2333', '0', '-1');
 
 -- ----------------------------
 -- Table structure for `sys_dict`
@@ -77,22 +361,18 @@ CREATE TABLE `sys_dict` (
   `value` varchar(1000) NOT NULL COMMENT '字典值',
   `order_num` int(11) DEFAULT '0' COMMENT '排序',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
+  `del_flag` tinyint(4) DEFAULT '0' COMMENT '删除标记  -1：已删除  0：正常',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `type` (`type`,`code`) USING BTREE
+  UNIQUE KEY `type` (`type`,`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='数据字典表';
 
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
-INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '女', '0', null, null, null, null, null, null);
-INSERT INTO `sys_dict` VALUES ('2', '性别', 'sex', '1', '男', '1', null, null, null, null, null, null);
-INSERT INTO `sys_dict` VALUES ('3', '性别', 'sex', '2', '未知', '3', null, null, null, null, null, null);
-INSERT INTO `sys_dict` VALUES ('4', '1', '2', '3', '5', '6', null, null, null, null, null, null);
+INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '女', '0', null, '0');
+INSERT INTO `sys_dict` VALUES ('2', '性别', 'sex', '1', '男', '1', null, '0');
+INSERT INTO `sys_dict` VALUES ('3', '性别', 'sex', '2', '未知', '3', null, '0');
+INSERT INTO `sys_dict` VALUES ('4', '1', '2', '3', '5', '6', null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_feedback`
@@ -112,7 +392,7 @@ CREATE TABLE `sys_feedback` (
   `update_time` datetime DEFAULT NULL COMMENT '修改日期',
   `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_feedback
@@ -130,60 +410,24 @@ CREATE TABLE `sys_log` (
   `params` varchar(5000) DEFAULT NULL COMMENT '请求参数',
   `time` bigint(20) NOT NULL COMMENT '执行时长(毫秒)',
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
-INSERT INTO `sys_log` VALUES ('1', 'admin', '保存菜单', 'io.renren.modules.sys.controller.SysMenuController.save()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"测试菜单\",\"url\":\"modules/sys/test.html\",\"type\":1,\"orderNum\":0}', '37', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('2', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"测试菜单\",\"url\":\"modules/sys/test.html\",\"type\":1,\"orderNum\":8}', '18', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('3', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"测试菜单\",\"url\":\"modules/sys/test.html\",\"type\":1,\"icon\":\"fa fa-book\",\"orderNum\":8}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('4', 'admin', '恢复定时任务', 'io.renren.modules.job.controller.ScheduleJobController.resume()', '[2]', '27', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('5', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"代码生成器\",\"url\":\"modules/sys/generator.html\",\"type\":1,\"icon\":\"fa fa-book\",\"orderNum\":8}', '12', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('6', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"测试菜单\",\"url\":\"modules/sys/test.html\",\"type\":1,\"icon\":\"fa fa-book\",\"orderNum\":8}', '10', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('7', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报管理\",\"url\":\"modules/sys/tdaily.html\",\"type\":1,\"icon\":\"fa fa-book\",\"orderNum\":8}', '37', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('8', 'admin', '保存菜单', 'io.renren.modules.sys.controller.SysMenuController.save()', '{\"menuId\":42,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"菜单详情\",\"url\":\"ddd\",\"type\":1,\"icon\":\"fa-paper-plane\",\"orderNum\":0}', '18', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('9', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":42,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"菜单详情\",\"url\":\"modules/sys/tdetaildaily.html\",\"type\":1,\"icon\":\"fa-paper-plane\",\"orderNum\":0}', '13', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('10', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":42,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdetaildaily.html\",\"type\":1,\"icon\":\"fa-paper-plane\",\"orderNum\":9}', '12', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('11', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":42,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdetaildaily.html\",\"type\":1,\"icon\":\"fa fa-paper-plane\",\"orderNum\":9}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('12', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":42,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdailydetail.html\",\"type\":1,\"icon\":\"fa fa-paper-plane\",\"orderNum\":9}', '54', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('13', 'admin', '删除菜单', 'io.renren.modules.sys.controller.SysMenuController.delete()', '41', '56', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('14', 'admin', '删除菜单', 'io.renren.modules.sys.controller.SysMenuController.delete()', '42', '14', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('15', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":31,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"部门管理\",\"url\":\"modules/sys/dept.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":2}', '19', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('16', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":3,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"角色管理\",\"url\":\"modules/sys/role.html\",\"type\":1,\"icon\":\"fa fa-user-secret\",\"orderNum\":3}', '13', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('17', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":4,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"菜单管理\",\"url\":\"modules/sys/menu.html\",\"type\":1,\"icon\":\"fa fa-th-list\",\"orderNum\":4}', '12', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('18', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":5,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"SQL监控\",\"url\":\"druid/sql.html\",\"type\":1,\"icon\":\"fa fa-bug\",\"orderNum\":5}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('19', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":6,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"定时任务\",\"url\":\"modules/job/schedule.html\",\"type\":1,\"icon\":\"fa fa-tasks\",\"orderNum\":6}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('20', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":27,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"参数管理\",\"url\":\"modules/sys/config.html\",\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"icon\":\"fa fa-sun-o\",\"orderNum\":7}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('21', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":30,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"文件上传\",\"url\":\"modules/oss/oss.html\",\"perms\":\"sys:oss:all\",\"type\":1,\"icon\":\"fa fa-file-image-o\",\"orderNum\":8}', '10', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('22', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":36,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"字典管理\",\"url\":\"modules/sys/dict.html\",\"type\":1,\"icon\":\"fa fa-bookmark-o\",\"orderNum\":9}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('23', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":29,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"系统日志\",\"url\":\"modules/sys/log.html\",\"perms\":\"sys:log:list\",\"type\":1,\"icon\":\"fa fa-file-text-o\",\"orderNum\":10}', '9', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('24', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":43,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报管理\",\"url\":\"modules/sys/tdaily.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":11}', '13', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('25', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":48,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdailydetail.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('26', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":48,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdailydetail.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":12}', '12', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('27', 'admin', '保存菜单', 'io.renren.modules.sys.controller.SysMenuController.save()', '{\"menuId\":53,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"用户管理\",\"type\":0,\"icon\":\"fa fa-user\",\"orderNum\":2}', '71', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('28', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":2,\"parentId\":53,\"parentName\":\"用户管理\",\"name\":\"管理员管理\",\"url\":\"modules/sys/user.html\",\"type\":1,\"icon\":\"fa fa-user\",\"orderNum\":0}', '22', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('29', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":3,\"parentId\":53,\"parentName\":\"用户管理\",\"name\":\"角色管理\",\"url\":\"modules/sys/role.html\",\"type\":1,\"icon\":\"fa fa-user-secret\",\"orderNum\":1}', '14', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('30', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":31,\"parentId\":53,\"parentName\":\"用户管理\",\"name\":\"部门管理\",\"url\":\"modules/sys/dept.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":2}', '11', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('31', 'admin', '保存菜单', 'io.renren.modules.sys.controller.SysMenuController.save()', '{\"menuId\":54,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"日报管理\",\"type\":0,\"icon\":\"fa fa-file-text-o\",\"orderNum\":2}', '8', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('32', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":43,\"parentId\":54,\"parentName\":\"日报管理\",\"name\":\"日报管理\",\"url\":\"modules/sys/tdaily.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":0}', '15', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('33', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":48,\"parentId\":54,\"parentName\":\"日报管理\",\"name\":\"日报详情\",\"url\":\"modules/sys/tdailydetail.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":1}', '12', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('34', 'admin', '修改菜单', 'io.renren.modules.sys.controller.SysMenuController.update()', '{\"menuId\":53,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"用户管理\",\"type\":0,\"icon\":\"fa fa-user\",\"orderNum\":1}', '10', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('35', 'admin', '立即执行任务', 'io.renren.modules.job.controller.ScheduleJobController.run()', '[1]', '220', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('36', 'admin', '立即执行任务', 'io.renren.modules.job.controller.ScheduleJobController.run()', '[1]', '62', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('37', 'admin', '暂停定时任务', 'io.renren.modules.job.controller.ScheduleJobController.pause()', '[1]', '73', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('38', 'admin', '暂停定时任务', 'io.renren.modules.job.controller.ScheduleJobController.pause()', '[2]', '96', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('39', 'admin', '立即执行任务', 'io.renren.modules.job.controller.ScheduleJobController.run()', '[1]', '83', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('40', 'admin', '保存用户', 'io.renren.modules.sys.controller.SysUserController.save()', '{\"userId\":2,\"username\":\"test\",\"password\":\"8e456be2d089bff403f5b5c7898b0c542131010efac8419ed432b6d875ed526d\",\"salt\":\"FgfYUWOmCliH581UtjLm\",\"email\":\"test@HH.test.com\",\"mobile\":\"13300000000\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Jun 5, 2019, 3:54:26 PM\",\"deptId\":1,\"deptName\":\"鸟不拉屎开源集团\"}', '276', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('41', 'admin', '保存角色', 'io.renren.modules.sys.controller.SysRoleController.save()', '{\"roleId\":1,\"roleName\":\"系统管理员\",\"remark\":\"系统管理员\",\"deptId\":1,\"deptName\":\"鸟不拉屎开源集团\",\"menuIdList\":[1,4,23,24,25,26,5,6,7,8,9,10,11,12,13,14,27,29,30,36,37,38,39,40,53,2,15,16,17,18,3,19,20,21,22,31,32,33,34,35,54,43,44,45,46,47,48,49,50,51,52],\"deptIdList\":[1,2,3,4,5],\"createTime\":\"Jun 5, 2019, 3:58:42 PM\"}', '277', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('42', 'admin', '修改用户', 'io.renren.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@renren.io\",\"mobile\":\"13612345678\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016, 11:11:11 AM\",\"deptId\":1,\"deptName\":\"鸟不拉屎开源集团\"}', '85', '0:0:0:0:0:0:0:1', null, null, null, null, null);
-INSERT INTO `sys_log` VALUES ('43', 'admin', '修改用户', 'io.renren.modules.sys.controller.SysUserController.update()', '{\"userId\":2,\"username\":\"test\",\"salt\":\"FgfYUWOmCliH581UtjLm\",\"email\":\"test@HH.test.com\",\"mobile\":\"13300000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jun 5, 2019, 3:54:26 PM\",\"deptId\":1,\"deptName\":\"鸟不拉屎开源集团\"}', '158', '0:0:0:0:0:0:0:1', null, null, null, null, null);
+INSERT INTO `sys_log` VALUES ('1', 'admin', '立即执行任务', 'com.niaobulashi.modules.job.controller.ScheduleJobController.run()', '[1]', '65', '0:0:0:0:0:0:0:1', '2019-06-13 16:30:15');
+INSERT INTO `sys_log` VALUES ('2', 'admin', '修改定时任务', 'com.niaobulashi.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":1,\"beanName\":\"testTask\",\"params\":\"niaobulashi\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":1,\"remark\":\"有参数测试\",\"createTime\":\"Dec 1, 2016, 11:16:46 PM\"}', '424', '0:0:0:0:0:0:0:1', '2019-06-13 16:37:24');
+INSERT INTO `sys_log` VALUES ('3', 'admin', '立即执行任务', 'com.niaobulashi.modules.job.controller.ScheduleJobController.run()', '[1]', '232', '0:0:0:0:0:0:0:1', '2019-06-13 16:37:44');
+INSERT INTO `sys_log` VALUES ('4', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":4,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"菜单管理\",\"url\":\"modules/sys/menu.html\",\"type\":1,\"icon\":\"fa fa-th-list\",\"orderNum\":0}', '68', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:02');
+INSERT INTO `sys_log` VALUES ('5', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":5,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"SQL监控\",\"url\":\"druid/sql.html\",\"type\":1,\"icon\":\"fa fa-bug\",\"orderNum\":1}', '52', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:12');
+INSERT INTO `sys_log` VALUES ('6', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":6,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"定时任务\",\"url\":\"modules/job/schedule.html\",\"type\":1,\"icon\":\"fa fa-tasks\",\"orderNum\":2}', '1382', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:28');
+INSERT INTO `sys_log` VALUES ('7', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":27,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"参数管理\",\"url\":\"modules/sys/config.html\",\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"icon\":\"fa fa-sun-o\",\"orderNum\":3}', '43', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:35');
+INSERT INTO `sys_log` VALUES ('8', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":29,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"系统日志\",\"url\":\"modules/sys/log.html\",\"perms\":\"sys:log:list\",\"type\":1,\"icon\":\"fa fa-file-text-o\",\"orderNum\":4}', '58', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:41');
+INSERT INTO `sys_log` VALUES ('9', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":30,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"文件上传\",\"url\":\"modules/oss/oss.html\",\"perms\":\"sys:oss:all\",\"type\":1,\"icon\":\"fa fa-file-image-o\",\"orderNum\":5}', '123', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:51');
+INSERT INTO `sys_log` VALUES ('10', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":36,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"字典管理\",\"url\":\"modules/sys/dict.html\",\"type\":1,\"icon\":\"fa fa-bookmark-o\",\"orderNum\":6}', '114', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:58');
+INSERT INTO `sys_log` VALUES ('11', 'admin', '保存菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.save()', '{\"menuId\":55,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"代码生成器\",\"url\":\"modules/sys/generator.html\",\"type\":1,\"icon\":\"fa fa-rocket\",\"orderNum\":7}', '126', '0:0:0:0:0:0:0:1', '2019-06-13 16:48:55');
 
 -- ----------------------------
 -- Table structure for `sys_menu`
@@ -198,68 +442,64 @@ CREATE TABLE `sys_menu` (
   `type` int(11) DEFAULT NULL COMMENT '类型   0：目录   1：菜单   2：按钮',
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'fa fa-cog', '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('2', '53', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('3', '53', '角色管理', 'modules/sys/role.html', null, '1', 'fa fa-user-secret', '1', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('4', '1', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '4', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('5', '1', 'SQL监控', 'druid/sql.html', null, '1', 'fa fa-bug', '5', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('6', '1', '定时任务', 'modules/job/schedule.html', null, '1', 'fa fa-tasks', '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('7', '6', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('8', '6', '新增', null, 'sys:schedule:save', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('9', '6', '修改', null, 'sys:schedule:update', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('10', '6', '删除', null, 'sys:schedule:delete', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('11', '6', '暂停', null, 'sys:schedule:pause', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('12', '6', '恢复', null, 'sys:schedule:resume', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('13', '6', '立即执行', null, 'sys:schedule:run', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('14', '6', '日志列表', null, 'sys:schedule:log', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('15', '2', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('16', '2', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('17', '2', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('18', '2', '删除', null, 'sys:user:delete', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('19', '3', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('20', '3', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('21', '3', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('22', '3', '删除', null, 'sys:role:delete', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('23', '4', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('24', '4', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('25', '4', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('26', '4', '删除', null, 'sys:menu:delete', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('27', '1', '参数管理', 'modules/sys/config.html', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', '1', 'fa fa-sun-o', '7', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('29', '1', '系统日志', 'modules/sys/log.html', 'sys:log:list', '1', 'fa fa-file-text-o', '10', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('30', '1', '文件上传', 'modules/oss/oss.html', 'sys:oss:all', '1', 'fa fa-file-image-o', '8', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('31', '53', '部门管理', 'modules/sys/dept.html', null, '1', 'fa fa-file-code-o', '2', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('32', '31', '查看', null, 'sys:dept:list,sys:dept:info', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('33', '31', '新增', null, 'sys:dept:save,sys:dept:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('34', '31', '修改', null, 'sys:dept:update,sys:dept:select', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('35', '31', '删除', null, 'sys:dept:delete', '2', null, '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('36', '1', '字典管理', 'modules/sys/dict.html', null, '1', 'fa fa-bookmark-o', '9', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('37', '36', '查看', null, 'sys:dict:list,sys:dict:info', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('38', '36', '新增', null, 'sys:dict:save', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('39', '36', '修改', null, 'sys:dict:update', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('40', '36', '删除', null, 'sys:dict:delete', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('43', '54', '日报管理', 'modules/sys/tdaily.html', null, '1', 'fa fa-file-code-o', '0', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('44', '43', '查看', null, 'sys:tdaily:list,sys:tdaily:info', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('45', '43', '新增', null, 'sys:tdaily:save', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('46', '43', '修改', null, 'sys:tdaily:update', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('47', '43', '删除', null, 'sys:tdaily:delete', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('48', '54', '日报详情', 'modules/sys/tdailydetail.html', null, '1', 'fa fa-file-code-o', '1', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('49', '48', '查看', null, 'sys:tdailydetail:list,sys:tdailydetail:info', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('50', '48', '新增', null, 'sys:tdailydetail:save', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('51', '48', '修改', null, 'sys:tdailydetail:update', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('52', '48', '删除', null, 'sys:tdailydetail:delete', '2', null, '6', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('53', '0', '用户管理', null, null, '0', 'fa fa-user', '1', null, null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('54', '0', '日报管理', null, null, '0', 'fa fa-file-text-o', '2', null, null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'fa fa-cog', '0');
+INSERT INTO `sys_menu` VALUES ('2', '53', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '0');
+INSERT INTO `sys_menu` VALUES ('3', '53', '角色管理', 'modules/sys/role.html', null, '1', 'fa fa-user-secret', '1');
+INSERT INTO `sys_menu` VALUES ('4', '1', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '0');
+INSERT INTO `sys_menu` VALUES ('5', '1', 'SQL监控', 'druid/sql.html', null, '1', 'fa fa-bug', '1');
+INSERT INTO `sys_menu` VALUES ('6', '1', '定时任务', 'modules/job/schedule.html', null, '1', 'fa fa-tasks', '2');
+INSERT INTO `sys_menu` VALUES ('7', '6', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('8', '6', '新增', null, 'sys:schedule:save', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('9', '6', '修改', null, 'sys:schedule:update', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('10', '6', '删除', null, 'sys:schedule:delete', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('11', '6', '暂停', null, 'sys:schedule:pause', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('12', '6', '恢复', null, 'sys:schedule:resume', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('13', '6', '立即执行', null, 'sys:schedule:run', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('14', '6', '日志列表', null, 'sys:schedule:log', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('15', '2', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('16', '2', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('17', '2', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('18', '2', '删除', null, 'sys:user:delete', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('19', '3', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('20', '3', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('21', '3', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('22', '3', '删除', null, 'sys:role:delete', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('23', '4', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('24', '4', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('25', '4', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('26', '4', '删除', null, 'sys:menu:delete', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('27', '1', '参数管理', 'modules/sys/config.html', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', '1', 'fa fa-sun-o', '3');
+INSERT INTO `sys_menu` VALUES ('29', '1', '系统日志', 'modules/sys/log.html', 'sys:log:list', '1', 'fa fa-file-text-o', '4');
+INSERT INTO `sys_menu` VALUES ('30', '1', '文件上传', 'modules/oss/oss.html', 'sys:oss:all', '1', 'fa fa-file-image-o', '5');
+INSERT INTO `sys_menu` VALUES ('31', '53', '部门管理', 'modules/sys/dept.html', null, '1', 'fa fa-file-code-o', '2');
+INSERT INTO `sys_menu` VALUES ('32', '31', '查看', null, 'sys:dept:list,sys:dept:info', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('33', '31', '新增', null, 'sys:dept:save,sys:dept:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('34', '31', '修改', null, 'sys:dept:update,sys:dept:select', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('35', '31', '删除', null, 'sys:dept:delete', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('36', '1', '字典管理', 'modules/sys/dict.html', null, '1', 'fa fa-bookmark-o', '6');
+INSERT INTO `sys_menu` VALUES ('37', '36', '查看', null, 'sys:dict:list,sys:dict:info', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('38', '36', '新增', null, 'sys:dict:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('39', '36', '修改', null, 'sys:dict:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('40', '36', '删除', null, 'sys:dict:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('43', '54', '日报管理', 'modules/sys/tdaily.html', null, '1', 'fa fa-file-code-o', '0');
+INSERT INTO `sys_menu` VALUES ('44', '43', '查看', null, 'sys:tdaily:list,sys:tdaily:info', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('45', '43', '新增', null, 'sys:tdaily:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('46', '43', '修改', null, 'sys:tdaily:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('47', '43', '删除', null, 'sys:tdaily:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('48', '54', '日报详情', 'modules/sys/tdailydetail.html', null, '1', 'fa fa-file-code-o', '1');
+INSERT INTO `sys_menu` VALUES ('49', '48', '查看', null, 'sys:tdailydetail:list,sys:tdailydetail:info', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('50', '48', '新增', null, 'sys:tdailydetail:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('51', '48', '修改', null, 'sys:tdailydetail:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('52', '48', '删除', null, 'sys:tdailydetail:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('53', '0', '用户管理', null, null, '0', 'fa fa-user', '1');
+INSERT INTO `sys_menu` VALUES ('54', '0', '日报管理', null, null, '0', 'fa fa-file-text-o', '2');
+INSERT INTO `sys_menu` VALUES ('55', '1', '代码生成器', 'modules/sys/generator.html', null, '1', 'fa fa-rocket', '7');
 
 -- ----------------------------
 -- Table structure for `sys_oss`
@@ -302,22 +542,17 @@ CREATE TABLE `sys_role_dept` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
-INSERT INTO `sys_role_dept` VALUES ('1', '1', '1', null, null, null, null, null);
-INSERT INTO `sys_role_dept` VALUES ('2', '1', '2', null, null, null, null, null);
-INSERT INTO `sys_role_dept` VALUES ('3', '1', '3', null, null, null, null, null);
-INSERT INTO `sys_role_dept` VALUES ('4', '1', '4', null, null, null, null, null);
-INSERT INTO `sys_role_dept` VALUES ('5', '1', '5', null, null, null, null, null);
+INSERT INTO `sys_role_dept` VALUES ('1', '1', '1');
+INSERT INTO `sys_role_dept` VALUES ('2', '1', '2');
+INSERT INTO `sys_role_dept` VALUES ('3', '1', '3');
+INSERT INTO `sys_role_dept` VALUES ('4', '1', '4');
+INSERT INTO `sys_role_dept` VALUES ('5', '1', '5');
 
 -- ----------------------------
 -- Table structure for `sys_role_menu`
@@ -327,68 +562,63 @@ CREATE TABLE `sys_role_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('1', '1', '1', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('2', '1', '4', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('3', '1', '23', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('4', '1', '24', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('5', '1', '25', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('6', '1', '26', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('7', '1', '5', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('8', '1', '6', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('9', '1', '7', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('10', '1', '8', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('11', '1', '9', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('12', '1', '10', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('13', '1', '11', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('14', '1', '12', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('15', '1', '13', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('16', '1', '14', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('17', '1', '27', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('18', '1', '29', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('19', '1', '30', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('20', '1', '36', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('21', '1', '37', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('22', '1', '38', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('23', '1', '39', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('24', '1', '40', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('25', '1', '53', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('26', '1', '2', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('27', '1', '15', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('28', '1', '16', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('29', '1', '17', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('30', '1', '18', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('31', '1', '3', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('32', '1', '19', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('33', '1', '20', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('34', '1', '21', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('35', '1', '22', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('36', '1', '31', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('37', '1', '32', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('38', '1', '33', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('39', '1', '34', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('40', '1', '35', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('41', '1', '54', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('42', '1', '43', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('43', '1', '44', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('44', '1', '45', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('45', '1', '46', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('46', '1', '47', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('47', '1', '48', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('48', '1', '49', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('49', '1', '50', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('50', '1', '51', null, null, null, null, null);
-INSERT INTO `sys_role_menu` VALUES ('51', '1', '52', null, null, null, null, null);
+INSERT INTO `sys_role_menu` VALUES ('1', '1', '1');
+INSERT INTO `sys_role_menu` VALUES ('2', '1', '4');
+INSERT INTO `sys_role_menu` VALUES ('3', '1', '23');
+INSERT INTO `sys_role_menu` VALUES ('4', '1', '24');
+INSERT INTO `sys_role_menu` VALUES ('5', '1', '25');
+INSERT INTO `sys_role_menu` VALUES ('6', '1', '26');
+INSERT INTO `sys_role_menu` VALUES ('7', '1', '5');
+INSERT INTO `sys_role_menu` VALUES ('8', '1', '6');
+INSERT INTO `sys_role_menu` VALUES ('9', '1', '7');
+INSERT INTO `sys_role_menu` VALUES ('10', '1', '8');
+INSERT INTO `sys_role_menu` VALUES ('11', '1', '9');
+INSERT INTO `sys_role_menu` VALUES ('12', '1', '10');
+INSERT INTO `sys_role_menu` VALUES ('13', '1', '11');
+INSERT INTO `sys_role_menu` VALUES ('14', '1', '12');
+INSERT INTO `sys_role_menu` VALUES ('15', '1', '13');
+INSERT INTO `sys_role_menu` VALUES ('16', '1', '14');
+INSERT INTO `sys_role_menu` VALUES ('17', '1', '27');
+INSERT INTO `sys_role_menu` VALUES ('18', '1', '29');
+INSERT INTO `sys_role_menu` VALUES ('19', '1', '30');
+INSERT INTO `sys_role_menu` VALUES ('20', '1', '36');
+INSERT INTO `sys_role_menu` VALUES ('21', '1', '37');
+INSERT INTO `sys_role_menu` VALUES ('22', '1', '38');
+INSERT INTO `sys_role_menu` VALUES ('23', '1', '39');
+INSERT INTO `sys_role_menu` VALUES ('24', '1', '40');
+INSERT INTO `sys_role_menu` VALUES ('25', '1', '53');
+INSERT INTO `sys_role_menu` VALUES ('26', '1', '2');
+INSERT INTO `sys_role_menu` VALUES ('27', '1', '15');
+INSERT INTO `sys_role_menu` VALUES ('28', '1', '16');
+INSERT INTO `sys_role_menu` VALUES ('29', '1', '17');
+INSERT INTO `sys_role_menu` VALUES ('30', '1', '18');
+INSERT INTO `sys_role_menu` VALUES ('31', '1', '3');
+INSERT INTO `sys_role_menu` VALUES ('32', '1', '19');
+INSERT INTO `sys_role_menu` VALUES ('33', '1', '20');
+INSERT INTO `sys_role_menu` VALUES ('34', '1', '21');
+INSERT INTO `sys_role_menu` VALUES ('35', '1', '22');
+INSERT INTO `sys_role_menu` VALUES ('36', '1', '31');
+INSERT INTO `sys_role_menu` VALUES ('37', '1', '32');
+INSERT INTO `sys_role_menu` VALUES ('38', '1', '33');
+INSERT INTO `sys_role_menu` VALUES ('39', '1', '34');
+INSERT INTO `sys_role_menu` VALUES ('40', '1', '35');
+INSERT INTO `sys_role_menu` VALUES ('41', '1', '54');
+INSERT INTO `sys_role_menu` VALUES ('42', '1', '43');
+INSERT INTO `sys_role_menu` VALUES ('43', '1', '44');
+INSERT INTO `sys_role_menu` VALUES ('44', '1', '45');
+INSERT INTO `sys_role_menu` VALUES ('45', '1', '46');
+INSERT INTO `sys_role_menu` VALUES ('46', '1', '47');
+INSERT INTO `sys_role_menu` VALUES ('47', '1', '48');
+INSERT INTO `sys_role_menu` VALUES ('48', '1', '49');
+INSERT INTO `sys_role_menu` VALUES ('49', '1', '50');
+INSERT INTO `sys_role_menu` VALUES ('50', '1', '51');
+INSERT INTO `sys_role_menu` VALUES ('51', '1', '52');
 
 -- ----------------------------
 -- Table structure for `sys_user`
@@ -403,20 +633,16 @@ CREATE TABLE `sys_user` (
   `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
   `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`) USING BTREE
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', '1', '1', null, null, null, null, null);
-INSERT INTO `sys_user` VALUES ('2', 'test', '8e456be2d089bff403f5b5c7898b0c542131010efac8419ed432b6d875ed526d', 'FgfYUWOmCliH581UtjLm', 'test@HH.test.com', '13300000000', '1', '1', null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'hulang6666@qq.com', '13612345678', '1', '1', '2016-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES ('2', 'test', '8e456be2d089bff403f5b5c7898b0c542131010efac8419ed432b6d875ed526d', 'FgfYUWOmCliH581UtjLm', 'test@HH.test.com', '13300000000', '1', '1', '2019-06-05 15:54:26');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
@@ -426,19 +652,14 @@ CREATE TABLE `sys_user_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
-  `delete_flag` varchar(1) DEFAULT NULL COMMENT '删除标志 0：未删除 1：已删除',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建者',
-  `update_time` datetime DEFAULT NULL COMMENT '修改日期',
-  `update_user_id` varchar(32) DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '1', '1', null, null, null, null, null);
-INSERT INTO `sys_user_role` VALUES ('2', '2', '1', null, null, null, null, null);
+INSERT INTO `sys_user_role` VALUES ('1', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('2', '2', '1');
 
 -- ----------------------------
 -- Table structure for `t_daily`
@@ -459,7 +680,7 @@ CREATE TABLE `t_daily` (
   `remark2` varchar(64) DEFAULT NULL COMMENT '备用字段2',
   `remark3` varchar(128) DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`daily_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日报表';
 
 -- ----------------------------
 -- Records of t_daily
@@ -990,7 +1211,7 @@ CREATE TABLE `t_daily_detail` (
   `remark2` varchar(64) DEFAULT NULL COMMENT '备用字段2',
   `remark3` varchar(128) DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`daily_detail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日报详情表';
 
 -- ----------------------------
 -- Records of t_daily_detail
