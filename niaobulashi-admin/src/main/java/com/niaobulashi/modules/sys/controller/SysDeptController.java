@@ -124,7 +124,7 @@ public class SysDeptController extends AbstractController {
 	@RequiresPermissions("sys:dept:delete")
 	public ResponseVo delete(long deptId){
 		//判断是否有子部门
-		List<Long> deptList = sysDeptService.queryDetpIdList(deptId);
+		List<Long> deptList = sysDeptService.queryDeptIdList(deptId);
 		if(deptList.size() > 0){
 			return ResponseVo.error("请先删除子部门");
 		}

@@ -27,8 +27,8 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> i
 	}
 
 	@Override
-	public List<Long> queryDetpIdList(Long parentId) {
-		return baseMapper.queryDetpIdList(parentId);
+	public List<Long> queryDeptIdList(Long parentId) {
+		return baseMapper.queryDeptIdList(parentId);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> i
 		List<Long> deptIdList = new ArrayList<>();
 
 		//获取子部门ID
-		List<Long> subIdList = queryDetpIdList(deptId);
+		List<Long> subIdList = queryDeptIdList(deptId);
 		getDeptTreeList(subIdList, deptIdList);
 
 		return deptIdList;
@@ -48,7 +48,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> i
 	 */
 	private void getDeptTreeList(List<Long> subIdList, List<Long> deptIdList){
 		for(Long deptId : subIdList){
-			List<Long> list = queryDetpIdList(deptId);
+			List<Long> list = queryDeptIdList(deptId);
 			if(list.size() > 0){
 				getDeptTreeList(list, deptIdList);
 			}

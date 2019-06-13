@@ -2786,19 +2786,36 @@ table.text-center,table.text-center td,table.text-center th {
         width:90%;
         margin-top:20px
     }
-}.login-box-body,.register-box-body {
-     background:#fff;
-     padding:20px;
-     border-top:0;
-     color:#666
- }
+}
+.login-box-body,.register-box-body {
+     background: #fff;
+     padding: 32px;
+     border-top: 0;
+     color: #666;
+     /*transform: translate(0%, 11%);*/
+     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+}
+.mgtop150 {
+    margin-top: 150px;
+}
+/*登陆页面的小熊*/
+.bear>img{
+    position: absolute;
+    top: 135px;
+    left: 50%;
+    width: 15rem;
+    -webkit-transform: translate(-50%, -70%);
+    transform: translate(-50%, -70%);
+    z-index: 1;
+}
 .login-box-body .form-control-feedback,.register-box-body .form-control-feedback {
     color:#777
 }
 .login-box-msg,.register-box-msg {
     margin:0;
     text-align:center;
-    padding:0 20px 20px 20px
+    padding:0 20px 20px 20px;
+    font-size: 28px;
 }
 .social-auth-links {
     margin:10px 0

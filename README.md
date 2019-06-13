@@ -22,7 +22,7 @@ niaobulashi
 │        ├─template 系统页面
 │        │    ├─modules      模块页面
 │        │    ├─index.html   AdminLTE主题风格（默认主题）
-│        │    └─index1.html  Layui主题风格
+│        │    └─index1.html  主题风格
 │        └─application.yml   全局配置文件
 ├─niaobulashi-api        API服务
 ├─niaobulashi-common     公共模块

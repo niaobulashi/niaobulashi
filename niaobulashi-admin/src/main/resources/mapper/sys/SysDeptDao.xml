@@ -16,6 +16,8 @@
         ) parentName
         FROM
             sys_dept t1
+        WHERE 1=1
+        AND t1.del_flag = 0
     </select>
 
     <!--查询子部门ID列表-->
@@ -24,7 +26,8 @@
             t.dept_id
         FROM
             sys_dept t
-        WHERE
-            t.parent_id = #{parentId}
+        WHERE 1=1
+        AND t.del_flag = 0
+        AND t.parent_id = #{parentId}
     </select>
 </mapper>
