@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50635
 File Encoding         : 65001
 
-Date: 2019-06-13 16:54:03
+Date: 2019-06-13 20:40:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -170,7 +170,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('NiaobulashiScheduler', 'DESKTOP-NNDNCEI1560415467154', '1560416040023', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('NiaobulashiScheduler', 'DESKTOP-NNDNCEI1560416828022', '1560429654363', '15000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -304,7 +304,6 @@ CREATE TABLE `schedule_job_log` (
 -- ----------------------------
 -- Records of schedule_job_log
 -- ----------------------------
-
 INSERT INTO `schedule_job_log` VALUES ('1', '1', 'testTask', null, 'niaobulashi', '0', null, '0', '2019-06-13 16:37:45');
 
 -- ----------------------------
@@ -412,7 +411,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -428,6 +427,9 @@ INSERT INTO `sys_log` VALUES ('8', 'admin', '修改菜单', 'com.niaobulashi.mod
 INSERT INTO `sys_log` VALUES ('9', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":30,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"文件上传\",\"url\":\"modules/oss/oss.html\",\"perms\":\"sys:oss:all\",\"type\":1,\"icon\":\"fa fa-file-image-o\",\"orderNum\":5}', '123', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:51');
 INSERT INTO `sys_log` VALUES ('10', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":36,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"字典管理\",\"url\":\"modules/sys/dict.html\",\"type\":1,\"icon\":\"fa fa-bookmark-o\",\"orderNum\":6}', '114', '0:0:0:0:0:0:0:1', '2019-06-13 16:47:58');
 INSERT INTO `sys_log` VALUES ('11', 'admin', '保存菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.save()', '{\"menuId\":55,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"代码生成器\",\"url\":\"modules/sys/generator.html\",\"type\":1,\"icon\":\"fa fa-rocket\",\"orderNum\":7}', '126', '0:0:0:0:0:0:0:1', '2019-06-13 16:48:55');
+INSERT INTO `sys_log` VALUES ('56', 'admin', '保存菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.save()', '{\"menuId\":56,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-space-shuttle\",\"orderNum\":8}', '46', '0:0:0:0:0:0:0:1', '2019-06-13 17:12:59');
+INSERT INTO `sys_log` VALUES ('57', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":56,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-space-shuttle\",\"orderNum\":8}', '42', '0:0:0:0:0:0:0:1', '2019-06-13 17:13:35');
+INSERT INTO `sys_log` VALUES ('58', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":56,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-align-left\",\"orderNum\":8}', '46', '0:0:0:0:0:0:0:1', '2019-06-13 17:17:26');
 
 -- ----------------------------
 -- Table structure for `sys_menu`
@@ -443,7 +445,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -500,6 +502,7 @@ INSERT INTO `sys_menu` VALUES ('52', '48', '删除', null, 'sys:tdailydetail:del
 INSERT INTO `sys_menu` VALUES ('53', '0', '用户管理', null, null, '0', 'fa fa-user', '1');
 INSERT INTO `sys_menu` VALUES ('54', '0', '日报管理', null, null, '0', 'fa fa-file-text-o', '2');
 INSERT INTO `sys_menu` VALUES ('55', '1', '代码生成器', 'modules/sys/generator.html', null, '1', 'fa fa-rocket', '7');
+INSERT INTO `sys_menu` VALUES ('56', '1', 'swagger', 'swagger/index.html', null, '1', 'fa fa-align-left', '8');
 
 -- ----------------------------
 -- Table structure for `sys_oss`
