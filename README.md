@@ -36,5 +36,27 @@ niaobulashi
 │
 ```
 
+**技术选型**
 
-开发中...
+- 核心框架：Spring Boot 2.1
+- 安全框架：Apache Shiro 1.4
+- 视图框架：Spring MVC 5.0
+- 持久层框架：MyBatis 3.5
+- 定时器：Quartz 2.3
+- 数据库连接池：Druid 1.1
+- 日志管理：SLF4J 1.7、Log4j
+- 页面交互：Vue2.x
+
+**软件需求**
+
+- JDK12
+- MySQL5.5+
+- Maven3.0+
+
+
+大致完成了开发。。。
+
+完善了数据库部分
+
+已将swagger添加到项目的系统管理中
+
