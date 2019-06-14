@@ -60,3 +60,6 @@ niaobulashi
 
 已将swagger添加到项目的系统管理中
 
+**Linux部署**
+
+- 打包成jar，在主项目niaobulashi上进行打包，mvn clean install
