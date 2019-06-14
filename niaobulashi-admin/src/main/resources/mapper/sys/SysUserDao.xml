@@ -10,9 +10,7 @@
         FROM
             sys_user_role ur
                 LEFT JOIN sys_role_menu rm ON rm.role_id = ur.role_id
-                AND rm.delete_flag = #{deleteFlag}
                 LEFT JOIN sys_menu m ON m.menu_id = rm.menu_id
-                AND m.delete_flag = #{deleteFlag}
         WHERE
             1 = 1
           AND ur.user_id = #{userId}
@@ -25,7 +23,6 @@
         FROM
             sys_user_role ur
                 LEFT JOIN sys_role_menu rm ON rm.role_id = ur.role_id
-                AND rm.delete_flag = #{deleteFlag}
         WHERE 1=1
           AND ur.user_id = #{userId};
     </select>

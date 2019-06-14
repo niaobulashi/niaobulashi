@@ -15,7 +15,7 @@
     
     <!--根据角色ID数组，批量删除-->
     <delete id="deleteBatch">
-        delete from sys_role_menu t where t.role_id in
+        delete t from sys_role_menu t where t.role_id in
         <foreach collection="array" item="roleId" open="(" separator="," close=")">
             #{roleId}
         </foreach>
