@@ -8,11 +8,11 @@ var vm = new Vue({
         errorMsg: '',
         src: 'captcha.jpg',
         img: {
-            normal: "/niaobulashi/statics/img/login/normal.png",
-            blindfold: '/niaobulashi/statics/img/login/blindfold.png',
-            greeting: '/niaobulashi/statics/img/login/greeting.png'
+            normal: "/statics/img/login/normal.png",
+            blindfold: '/statics/img/login/blindfold.png',
+            greeting: '/statics/img/login/greeting.png'
         },
-        bear: "/niaobulashi/statics/img/login/normal.png",
+        bear: "/statics/img/login/normal.png",
     },
     beforeCreate: function(){
         if(self != top){
