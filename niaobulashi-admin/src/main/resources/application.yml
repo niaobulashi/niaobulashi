@@ -4,7 +4,7 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 8080
+  port: 8081
   servlet:
     context-path: /niaobulashi
 
@@ -41,6 +41,7 @@ niaobulashi:
   globalSessionTimeout: 3600   #单机环境，session过期时间为60分钟
   redis:
     open: false  #是否开启redis缓存  true开启   false关闭
+  database: mysql
 
 #mybatis
 mybatis-plus:
@@ -65,3 +66,8 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+
+pagehelper:
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

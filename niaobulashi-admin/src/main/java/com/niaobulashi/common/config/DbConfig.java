@@ -1,7 +1,8 @@
-package com.niaobulashi.config;
+package com.niaobulashi.common.config;
 
-import com.niaobulashi.dao.*;
-import com.niaobulashi.utils.RRException;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.niaobulashi.common.exception.RRException;
+import com.niaobulashi.modules.sys.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,11 +14,12 @@ import javax.annotation.Resource;
 /**
  * @program: niaobulashi
  * @description: 数据库配置
- * @author: hulang
- * @create: 2019-06-12 19:38
+ * @author: hulang    hulang6666@qq.com
+ * @create: 2019-06-15 15:58
  */
 @Configuration
 public class DbConfig {
+
     @Value("${niaobulashi.database: mysql}")
     private String database;
     @Resource
