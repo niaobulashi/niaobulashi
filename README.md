@@ -54,12 +54,15 @@ niaobulashi
 - Maven3.0+
 
 
-大致完成了开发。。。
-
-完善了数据库部分
-
-已将swagger添加到项目的系统管理中
-
 **Linux部署**
 
 - 打包成jar，在主项目niaobulashi上进行打包，mvn clean install
+- 会生成相应项目的jar包，放在Linux目标目录下，执行java -jar 包名
+
+
+**运行可能会遇到的问题**
+- 启动可能报错，mysql严格区分大小写，可能找不到表，解决方案：[mysql不区分大小写](https://www.cnblogs.com/jr1260/p/6529235.html)
+- 没有/tmp/spring.log目录权限，解决方案：在root用户下，添加写权限sudo chmod 777 spring.log
+- 登陆页面的验证码显示乱码，原因：linux没有安装字体，解决方案：[linux安装字体](https://blog.csdn.net/wangxintong_1992/article/details/81194896)
+
+
