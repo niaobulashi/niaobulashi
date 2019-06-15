@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: 是一套轻量级权限管理系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
-  version: 3.0.0
+  version: 2.0.0
   title: niaobulashi
 
 basePath: /niaobulashi
@@ -1015,6 +1015,41 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
+  /sys/dict/list:
+    get:
+      tags:
+        - 字典管理
+      summary: 字典列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 页码
+          in: query
+          type: integer
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          required: true
+        - name: sidx
+          description: 排序字段
+          in: query
+          type: string
+        - name: order
+          description: 排序方式，如：asc、desc
+          in: query
+          type: string
+        - name: name
+          description: 字典名称
+          in: query
+          type: string
+      responses:
+        '200':
+          description: 返回字典列表
+          schema:
+            $ref: '#/definitions/SysDictEntity'
 
 #定义数据模型
 definitions:
@@ -1421,4 +1456,30 @@ definitions:
         description: 创建时间
         type: string
         format: date-time
-
+  SysDictEntity:
+    type: object
+    properties:
+      id:
+        description: 主键ID
+        type: integer
+        format: int64
+      name:
+        description: 字典名称
+        type: string
+      type:
+        description: 字典类型
+        type: string
+      code:
+        description: 字典码
+        type: string
+      value:
+        description: 字典值
+        type: integer
+        format: int32
+      remark:
+        description: 备注
+        type: string
+      delFlag:
+        description: 删除标记  -1：已删除  0：正常
+        type: integer
+        format: int32
