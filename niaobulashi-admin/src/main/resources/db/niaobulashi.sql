@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50635
 File Encoding         : 65001
 
-Date: 2019-06-13 20:40:56
+Date: 2019-06-15 14:57:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `qrtz_blob_triggers` (
   `TRIGGER_GROUP` varchar(200) NOT NULL,
   `BLOB_DATA` blob,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
   CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -87,12 +87,12 @@ CREATE TABLE `qrtz_fired_triggers` (
   `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
   `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
-  KEY `IDX_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
-  KEY `IDX_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
-  KEY `IDX_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
-  KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
+  KEY `IDX_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`) USING BTREE,
+  KEY `IDX_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`) USING BTREE,
+  KEY `IDX_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -115,8 +115,8 @@ CREATE TABLE `qrtz_job_details` (
   `REQUESTS_RECOVERY` varchar(1) NOT NULL,
   `JOB_DATA` blob,
   PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
-  KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
+  KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`) USING BTREE,
+  KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -170,7 +170,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('NiaobulashiScheduler', 'DESKTOP-NNDNCEI1560416828022', '1560429654363', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('NiaobulashiScheduler', 'LAPTOP-1O4LT4911560581183104', '1560581830843', '15000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -240,18 +240,18 @@ CREATE TABLE `qrtz_triggers` (
   `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
   `JOB_DATA` blob,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
-  KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
-  KEY `IDX_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
-  KEY `IDX_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
-  KEY `IDX_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
-  KEY `IDX_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  KEY `IDX_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  KEY `IDX_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
-  KEY `IDX_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
-  KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
-  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
-  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`) USING BTREE,
+  KEY `IDX_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  KEY `IDX_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`) USING BTREE,
+  KEY `IDX_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`) USING BTREE,
+  KEY `IDX_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`) USING BTREE,
+  KEY `IDX_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`) USING BTREE,
+  KEY `IDX_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`) USING BTREE,
+  KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`) USING BTREE,
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`) USING BTREE,
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`) USING BTREE,
   CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -298,13 +298,15 @@ CREATE TABLE `schedule_job_log` (
   `times` int(11) NOT NULL COMMENT '耗时(单位：毫秒)',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
-  KEY `job_id` (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+  KEY `job_id` (`job_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of schedule_job_log
 -- ----------------------------
 INSERT INTO `schedule_job_log` VALUES ('1', '1', 'testTask', null, 'niaobulashi', '0', null, '0', '2019-06-13 16:37:45');
+INSERT INTO `schedule_job_log` VALUES ('78', '1', 'testTask', null, 'niaobulashi', '0', null, '1', '2019-06-14 10:46:31');
+INSERT INTO `schedule_job_log` VALUES ('79', '2', 'testTask', null, null, '0', null, '0', '2019-06-14 10:46:31');
 
 -- ----------------------------
 -- Table structure for `sys_config`
@@ -317,7 +319,7 @@ CREATE TABLE `sys_config` (
   `status` tinyint(4) DEFAULT '1' COMMENT '状态   0：隐藏   1：显示',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `param_key` (`param_key`)
+  UNIQUE KEY `param_key` (`param_key`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统配置信息表';
 
 -- ----------------------------
@@ -336,17 +338,24 @@ CREATE TABLE `sys_dept` (
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('1', '0', '人人开源集团', '0', '0');
-INSERT INTO `sys_dept` VALUES ('2', '1', '长沙分公司', '1', '0');
+INSERT INTO `sys_dept` VALUES ('1', '0', '鸟不拉屎集团', '0', '0');
+INSERT INTO `sys_dept` VALUES ('2', '1', '武汉分总部', '1', '0');
 INSERT INTO `sys_dept` VALUES ('3', '1', '上海分公司', '2', '0');
 INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', '0');
 INSERT INTO `sys_dept` VALUES ('5', '3', '销售部', '1', '0');
 INSERT INTO `sys_dept` VALUES ('6', '0', '2333', '0', '-1');
+INSERT INTO `sys_dept` VALUES ('7', '2', '技术部', '0', '0');
+INSERT INTO `sys_dept` VALUES ('8', '2', '销售部', '1', '0');
+INSERT INTO `sys_dept` VALUES ('9', '1', '北京分公司', '0', '0');
+INSERT INTO `sys_dept` VALUES ('10', '9', '开发部', '0', '0');
+INSERT INTO `sys_dept` VALUES ('11', '0', '人才有限公司', '0', '0');
+INSERT INTO `sys_dept` VALUES ('12', '11', '访客', '0', '0');
+INSERT INTO `sys_dept` VALUES ('13', '11', '哦豁', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_dict`
@@ -362,7 +371,7 @@ CREATE TABLE `sys_dict` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `del_flag` tinyint(4) DEFAULT '0' COMMENT '删除标记  -1：已删除  0：正常',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `type` (`type`,`code`)
+  UNIQUE KEY `type` (`type`,`code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='数据字典表';
 
 -- ----------------------------
@@ -411,7 +420,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -430,6 +439,19 @@ INSERT INTO `sys_log` VALUES ('11', 'admin', '保存菜单', 'com.niaobulashi.mo
 INSERT INTO `sys_log` VALUES ('56', 'admin', '保存菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.save()', '{\"menuId\":56,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-space-shuttle\",\"orderNum\":8}', '46', '0:0:0:0:0:0:0:1', '2019-06-13 17:12:59');
 INSERT INTO `sys_log` VALUES ('57', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":56,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-space-shuttle\",\"orderNum\":8}', '42', '0:0:0:0:0:0:0:1', '2019-06-13 17:13:35');
 INSERT INTO `sys_log` VALUES ('58', 'admin', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":56,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"swagger\",\"url\":\"swagger/index.html\",\"type\":1,\"icon\":\"fa fa-align-left\",\"orderNum\":8}', '46', '0:0:0:0:0:0:0:1', '2019-06-13 17:17:26');
+INSERT INTO `sys_log` VALUES ('59', 'admin', '立即执行任务', 'com.niaobulashi.modules.job.controller.ScheduleJobController.run()', '[1,2]', '181', '0:0:0:0:0:0:0:1', '2019-06-14 10:46:30');
+INSERT INTO `sys_log` VALUES ('60', 'admin', '修改密码', 'com.niaobulashi.modules.sys.controller.SysUserController.password()', '\"admin\"', '110', '0:0:0:0:0:0:0:1', '2019-06-14 10:59:58');
+INSERT INTO `sys_log` VALUES ('61', 'admin', '保存角色', 'com.niaobulashi.modules.sys.controller.SysRoleController.save()', '{\"roleId\":6,\"roleName\":\"访客\",\"deptId\":12,\"deptName\":\"访客\",\"menuIdList\":[1,4,23,5,6,7,11,12,13,14,27,29,36,37,56,53,3,19,31,32],\"deptIdList\":[12],\"createTime\":\"Jun 14, 2019, 11:22:26 AM\"}', '199', '0:0:0:0:0:0:0:1', '2019-06-14 11:22:27');
+INSERT INTO `sys_log` VALUES ('62', 'admin', '保存用户', 'com.niaobulashi.modules.sys.controller.SysUserController.save()', '{\"userId\":3,\"username\":\"guest\",\"password\":\"1600965621d16d33f9386703d6485061eb8f30f38c70051f04e74831ff2933a7\",\"salt\":\"d9v2BTrBXvHrU4kNPt1V\",\"email\":\"test@HH.qq.com\",\"mobile\":\"13166666666\",\"status\":1,\"roleIdList\":[6],\"createTime\":\"Jun 14, 2019, 11:23:19 AM\",\"deptId\":12,\"deptName\":\"访客\"}', '76', '0:0:0:0:0:0:0:1', '2019-06-14 11:23:20');
+INSERT INTO `sys_log` VALUES ('63', 'admin', '修改角色', 'com.niaobulashi.modules.sys.controller.SysRoleController.update()', '{\"roleId\":6,\"roleName\":\"访客\",\"deptId\":12,\"deptName\":\"访客\",\"menuIdList\":[1,4,23,5,6,7,11,12,13,14,27,29,36,37,56,53,2,15,3,19,31,32],\"deptIdList\":[12],\"createTime\":\"Jun 14, 2019, 11:22:26 AM\"}', '183', '0:0:0:0:0:0:0:1', '2019-06-14 11:27:38');
+INSERT INTO `sys_log` VALUES ('64', 'admin', '修改角色', 'com.niaobulashi.modules.sys.controller.SysRoleController.update()', '{\"roleId\":6,\"roleName\":\"访客\",\"deptId\":12,\"deptName\":\"访客\",\"menuIdList\":[1,4,23,5,6,7,11,12,13,14,27,29,36,37,53,2,15,3,19,31,32],\"deptIdList\":[12],\"createTime\":\"Jun 14, 2019 11:22:26 AM\"}', '311', '113.200.203.6', '2019-06-14 16:10:29');
+INSERT INTO `sys_log` VALUES ('65', 'admin', '保存角色', 'com.niaobulashi.modules.sys.controller.SysRoleController.save()', '{\"roleId\":7,\"roleName\":\"小伙伴\",\"deptId\":13,\"deptName\":\"哦豁\",\"menuIdList\":[1,4,23,5,6,7,8,9,11,12,13,14,27,29,30,36,37,38,39,40,55,56,53,2,15,3,19,31,32],\"deptIdList\":[13],\"createTime\":\"Jun 14, 2019 5:26:39 PM\"}', '425', '113.200.203.6', '2019-06-14 17:26:39');
+INSERT INTO `sys_log` VALUES ('66', 'admin', '修改用户', 'com.niaobulashi.modules.sys.controller.SysUserController.update()', '{\"userId\":2,\"username\":\"test\",\"salt\":\"FgfYUWOmCliH581UtjLm\",\"email\":\"test@HH.test.com\",\"mobile\":\"13300000000\",\"status\":1,\"roleIdList\":[7,1],\"createTime\":\"Jun 5, 2019 3:54:26 PM\",\"deptId\":1,\"deptName\":\"鸟不拉屎集团\"}', '70', '113.200.203.6', '2019-06-14 17:27:01');
+INSERT INTO `sys_log` VALUES ('67', 'admin', '修改用户', 'com.niaobulashi.modules.sys.controller.SysUserController.update()', '{\"userId\":2,\"username\":\"test\",\"password\":\"f3fedccee4fd2770e2a35d7083b57605bad4227869639e74b94643cdc3192b36\",\"salt\":\"FgfYUWOmCliH581UtjLm\",\"email\":\"test@HH.test.com\",\"mobile\":\"13300000000\",\"status\":1,\"roleIdList\":[7,1],\"createTime\":\"Jun 5, 2019 3:54:26 PM\",\"deptId\":1,\"deptName\":\"鸟不拉屎集团\"}', '74', '113.200.203.6', '2019-06-14 17:27:37');
+INSERT INTO `sys_log` VALUES ('68', 'test', '修改菜单', 'com.niaobulashi.modules.sys.controller.SysMenuController.update()', '{\"menuId\":2,\"parentId\":53,\"parentName\":\"用户管理\",\"name\":\"用户管理\",\"url\":\"modules/sys/user.html\",\"type\":1,\"icon\":\"fa fa-user\",\"orderNum\":0}', '17', '113.200.203.6', '2019-06-14 17:28:19');
+INSERT INTO `sys_log` VALUES ('69', 'test', '修改用户', 'com.niaobulashi.modules.sys.controller.SysUserController.update()', '{\"userId\":2,\"username\":\"test\",\"salt\":\"FgfYUWOmCliH581UtjLm\",\"email\":\"test@HH.test.com\",\"mobile\":\"13300000000\",\"status\":1,\"roleIdList\":[7],\"createTime\":\"Jun 5, 2019 3:54:26 PM\",\"deptId\":1,\"deptName\":\"鸟不拉屎集团\"}', '46', '113.200.203.6', '2019-06-14 17:28:34');
+INSERT INTO `sys_log` VALUES ('70', 'admin', '修改密码', 'com.niaobulashi.modules.sys.controller.SysUserController.password()', '\"admin\"', '7', '0:0:0:0:0:0:0:1', '2019-06-15 14:52:47');
+INSERT INTO `sys_log` VALUES ('71', 'admin', '修改密码', 'com.niaobulashi.modules.sys.controller.SysUserController.password()', '\"HuHu@19930327\"', '70', '0:0:0:0:0:0:0:1', '2019-06-15 14:52:54');
 
 -- ----------------------------
 -- Table structure for `sys_menu`
@@ -451,7 +473,7 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'fa fa-cog', '0');
-INSERT INTO `sys_menu` VALUES ('2', '53', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '0');
+INSERT INTO `sys_menu` VALUES ('2', '53', '用户管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '0');
 INSERT INTO `sys_menu` VALUES ('3', '53', '角色管理', 'modules/sys/role.html', null, '1', 'fa fa-user-secret', '1');
 INSERT INTO `sys_menu` VALUES ('4', '1', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '0');
 INSERT INTO `sys_menu` VALUES ('5', '1', 'SQL监控', 'druid/sql.html', null, '1', 'fa fa-bug', '1');
@@ -530,12 +552,14 @@ CREATE TABLE `sys_role` (
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '系统管理员', '系统管理员', '1', '2019-06-05 15:58:43');
+INSERT INTO `sys_role` VALUES ('6', '访客', null, '12', '2019-06-14 11:22:26');
+INSERT INTO `sys_role` VALUES ('7', '小伙伴', null, '13', '2019-06-14 17:26:39');
 
 -- ----------------------------
 -- Table structure for `sys_role_dept`
@@ -546,7 +570,7 @@ CREATE TABLE `sys_role_dept` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
@@ -556,6 +580,8 @@ INSERT INTO `sys_role_dept` VALUES ('2', '1', '2');
 INSERT INTO `sys_role_dept` VALUES ('3', '1', '3');
 INSERT INTO `sys_role_dept` VALUES ('4', '1', '4');
 INSERT INTO `sys_role_dept` VALUES ('5', '1', '5');
+INSERT INTO `sys_role_dept` VALUES ('8', '6', '12');
+INSERT INTO `sys_role_dept` VALUES ('9', '7', '13');
 
 -- ----------------------------
 -- Table structure for `sys_role_menu`
@@ -566,7 +592,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -622,6 +648,56 @@ INSERT INTO `sys_role_menu` VALUES ('48', '1', '49');
 INSERT INTO `sys_role_menu` VALUES ('49', '1', '50');
 INSERT INTO `sys_role_menu` VALUES ('50', '1', '51');
 INSERT INTO `sys_role_menu` VALUES ('51', '1', '52');
+INSERT INTO `sys_role_menu` VALUES ('96', '6', '1');
+INSERT INTO `sys_role_menu` VALUES ('97', '6', '4');
+INSERT INTO `sys_role_menu` VALUES ('98', '6', '23');
+INSERT INTO `sys_role_menu` VALUES ('99', '6', '5');
+INSERT INTO `sys_role_menu` VALUES ('100', '6', '6');
+INSERT INTO `sys_role_menu` VALUES ('101', '6', '7');
+INSERT INTO `sys_role_menu` VALUES ('102', '6', '11');
+INSERT INTO `sys_role_menu` VALUES ('103', '6', '12');
+INSERT INTO `sys_role_menu` VALUES ('104', '6', '13');
+INSERT INTO `sys_role_menu` VALUES ('105', '6', '14');
+INSERT INTO `sys_role_menu` VALUES ('106', '6', '27');
+INSERT INTO `sys_role_menu` VALUES ('107', '6', '29');
+INSERT INTO `sys_role_menu` VALUES ('108', '6', '36');
+INSERT INTO `sys_role_menu` VALUES ('109', '6', '37');
+INSERT INTO `sys_role_menu` VALUES ('110', '6', '53');
+INSERT INTO `sys_role_menu` VALUES ('111', '6', '2');
+INSERT INTO `sys_role_menu` VALUES ('112', '6', '15');
+INSERT INTO `sys_role_menu` VALUES ('113', '6', '3');
+INSERT INTO `sys_role_menu` VALUES ('114', '6', '19');
+INSERT INTO `sys_role_menu` VALUES ('115', '6', '31');
+INSERT INTO `sys_role_menu` VALUES ('116', '6', '32');
+INSERT INTO `sys_role_menu` VALUES ('117', '7', '1');
+INSERT INTO `sys_role_menu` VALUES ('118', '7', '4');
+INSERT INTO `sys_role_menu` VALUES ('119', '7', '23');
+INSERT INTO `sys_role_menu` VALUES ('120', '7', '5');
+INSERT INTO `sys_role_menu` VALUES ('121', '7', '6');
+INSERT INTO `sys_role_menu` VALUES ('122', '7', '7');
+INSERT INTO `sys_role_menu` VALUES ('123', '7', '8');
+INSERT INTO `sys_role_menu` VALUES ('124', '7', '9');
+INSERT INTO `sys_role_menu` VALUES ('125', '7', '11');
+INSERT INTO `sys_role_menu` VALUES ('126', '7', '12');
+INSERT INTO `sys_role_menu` VALUES ('127', '7', '13');
+INSERT INTO `sys_role_menu` VALUES ('128', '7', '14');
+INSERT INTO `sys_role_menu` VALUES ('129', '7', '27');
+INSERT INTO `sys_role_menu` VALUES ('130', '7', '29');
+INSERT INTO `sys_role_menu` VALUES ('131', '7', '30');
+INSERT INTO `sys_role_menu` VALUES ('132', '7', '36');
+INSERT INTO `sys_role_menu` VALUES ('133', '7', '37');
+INSERT INTO `sys_role_menu` VALUES ('134', '7', '38');
+INSERT INTO `sys_role_menu` VALUES ('135', '7', '39');
+INSERT INTO `sys_role_menu` VALUES ('136', '7', '40');
+INSERT INTO `sys_role_menu` VALUES ('137', '7', '55');
+INSERT INTO `sys_role_menu` VALUES ('138', '7', '56');
+INSERT INTO `sys_role_menu` VALUES ('139', '7', '53');
+INSERT INTO `sys_role_menu` VALUES ('140', '7', '2');
+INSERT INTO `sys_role_menu` VALUES ('141', '7', '15');
+INSERT INTO `sys_role_menu` VALUES ('142', '7', '3');
+INSERT INTO `sys_role_menu` VALUES ('143', '7', '19');
+INSERT INTO `sys_role_menu` VALUES ('144', '7', '31');
+INSERT INTO `sys_role_menu` VALUES ('145', '7', '32');
 
 -- ----------------------------
 -- Table structure for `sys_user`
@@ -638,14 +714,15 @@ CREATE TABLE `sys_user` (
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+  UNIQUE KEY `username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'hulang6666@qq.com', '13612345678', '1', '1', '2016-11-11 11:11:11');
-INSERT INTO `sys_user` VALUES ('2', 'test', '8e456be2d089bff403f5b5c7898b0c542131010efac8419ed432b6d875ed526d', 'FgfYUWOmCliH581UtjLm', 'test@HH.test.com', '13300000000', '1', '1', '2019-06-05 15:54:26');
+INSERT INTO `sys_user` VALUES ('2', 'test', 'f3fedccee4fd2770e2a35d7083b57605bad4227869639e74b94643cdc3192b36', 'FgfYUWOmCliH581UtjLm', 'test@HH.test.com', '13300000000', '1', '1', '2019-06-05 15:54:26');
+INSERT INTO `sys_user` VALUES ('3', 'guest', '1600965621d16d33f9386703d6485061eb8f30f38c70051f04e74831ff2933a7', 'd9v2BTrBXvHrU4kNPt1V', 'test@HH.qq.com', '13166666666', '1', '12', '2019-06-14 11:23:20');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
@@ -656,13 +733,14 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1', '1');
-INSERT INTO `sys_user_role` VALUES ('2', '2', '1');
+INSERT INTO `sys_user_role` VALUES ('3', '3', '6');
+INSERT INTO `sys_user_role` VALUES ('8', '2', '7');
 
 -- ----------------------------
 -- Table structure for `t_daily`
