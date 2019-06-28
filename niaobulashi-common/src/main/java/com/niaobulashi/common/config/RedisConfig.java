@@ -22,9 +22,13 @@ public class RedisConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        // key采用String的序列化方式
         redisTemplate.setKeySerializer(new StringRedisSerializer());
+        // hash的key也采用String的序列化方式
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        // hash的value序列化方式采用jackson
         redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        // value序列化方式采用jackson
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;
