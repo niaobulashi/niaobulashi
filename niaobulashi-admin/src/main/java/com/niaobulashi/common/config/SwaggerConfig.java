@@ -38,7 +38,7 @@ public class SwaggerConfig{
         return new ApiInfoBuilder()
             .title("鸟不拉屎开源")
             .description("niaobulashi-admin文档")
-            .termsOfServiceUrl("https://www.niaobulashi.com")
+            .termsOfServiceUrl("https://niaobulashi.com")
             .version("4.0.0")
             .build();
     }
