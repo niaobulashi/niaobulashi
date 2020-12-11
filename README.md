@@ -1,3 +1,8 @@
+# 请各位小伙伴转移至项目【ruoyi】
+
+https://github.com/niaobulashi/ruoyi
+
+
 ![](https://niaobulashi.com/usr/uploads/sina/5d1c5145a776b.jpg)
 
 github项目地址：https://github.com/niaobulashi/niaobulashi
