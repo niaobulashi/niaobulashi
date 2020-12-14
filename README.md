@@ -35,7 +35,6 @@
 - [Spring-boot学习项目](https://github.com/niaobulashi/spring-boot-learning)
 - [daily日报管理项目](https://github.com/niaobulashi/daily)
 - [excel导入导出工具项目](https://github.com/niaobulashi/easy-excel)
-- [github博客](https://github.com/niaobulashi/niaobulashi.com)
 - ...
 
 ### 正在做的事
