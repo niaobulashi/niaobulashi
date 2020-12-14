@@ -29,12 +29,12 @@
 - ...
 
 ### 开源项目
-- [niaobulashi管理系统](https://github.com/niaobulashi/niaobulashi)
 - [基于开源系统ruoyi的扩展开发项目](https://github.com/niaobulashi/ruoyi)
+- [工作日历同步项目](https://github.com/niaobulashi/calendar)
+- [niaobulashi管理系统](https://github.com/niaobulashi/niaobulashi)
 - [Spring-boot学习项目](https://github.com/niaobulashi/spring-boot-learning)
 - [daily日报管理项目](https://github.com/niaobulashi/daily)
 - [excel导入导出工具项目](https://github.com/niaobulashi/easy-excel)
-- [工作日历同步项目](https://github.com/niaobulashi/calendar)
 - [github博客](https://github.com/niaobulashi/niaobulashi.com)
 - ...
 
