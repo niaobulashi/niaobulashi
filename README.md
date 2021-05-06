@@ -9,7 +9,6 @@
 - 活在当下的程序猿
 - 💬 扣扣邮箱，欢迎一起讨论学习：[hulang6666@qq.com](mailto:hulang6666@qq.com)
 - ⭐ <a href="https://niaobulashi.com/" target="_blank">个人博客</a>
-- ⭐ 暴躁喷子 键盘侠
 - 理工酸菜鱼 巴南黄焖鸡
 - 做自己爱做的事
 
