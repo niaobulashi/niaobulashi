@@ -5,7 +5,6 @@
 ### I'm niaobulashi 
 
 - 被社会蹂躏的社畜，
-- ⚡ 低配韩商言 ctf酱油选手 web安全菜鸡 CyberPunk2077牛皮
 - 活在当下的程序猿
 - 💬 扣扣邮箱，欢迎一起讨论学习：[hulang6666@qq.com](mailto:hulang6666@qq.com)
 - ⭐ <a href="https://niaobulashi.com/" target="_blank">个人博客</a>
