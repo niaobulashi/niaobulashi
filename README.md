@@ -7,7 +7,6 @@
 - 被社会蹂躏的社畜，
 - 活在当下的程序猿
 - 💬 扣扣邮箱，欢迎一起讨论学习：[hulang6666@qq.com](mailto:hulang6666@qq.com)
-- ⭐ <a href="https://niaobulashi.com/" target="_blank">个人博客</a>
 - 理工酸菜鱼 巴南黄焖鸡
 - 做自己爱做的事
 
@@ -27,6 +26,7 @@
 - ...
 
 ### 开源项目
+- [基于ruoyi的e-hospital](https://github.com/niaobulashi/e-hospital)
 - [基于开源系统ruoyi的扩展开发项目](https://github.com/niaobulashi/ruoyi)
 - [工作日历同步项目](https://github.com/niaobulashi/calendar)
 - [niaobulashi管理系统](https://github.com/niaobulashi/niaobulashi)
@@ -36,21 +36,12 @@
 - ...
 
 ### 正在做的事
-- ruoyi 基于若依来源项目扩展开发的其他
-- 巩固Java基础
-- Java进阶升华
-- 学习项目架构师
+- 搬砖学习
+- 搞钱搞钱
 - ...
 
 [![niaobulashi's github stats](https://github-readme-stats.anuraghazra1.vercel.app/api/top-langs/?username=niaobulashi&theme=radical&hide_langs_below=1)](https://github.com/anuraghazra/github-readme-stats)
 [![niaobulashi's github stats](https://github-readme-stats.vercel.app/api?username=niaobulashi&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
-
-
-> ***做技术的黑客心态加上开放共进的态度是成长和越过高山幽谷的秘籍😊***
-
-
-⭐️ From [niaobulashi](https://github.com/niaobulashi)
-
 
 
 # 最后祝大家身体健康
